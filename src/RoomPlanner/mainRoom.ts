@@ -3,6 +3,14 @@ import { visualizeSetup } from "./visualizeSetup";
 import { buildRapidFillCluster } from "./stamps/rapidFillCluster";
 import { buildAnchor } from "./stamps/anchor";
 import { buildLabs } from "./stamps/labs";
+import { placeRoadsToSources } from "./placeStructures/placeRoadsToSources";
+import { placeRoadsAroundStructs } from "./placeStructures/placeRoadsAroundStructs";
+import { placeExtensions } from "./placeStructures/placeExtensions";
+
+import { getEmbededStructure } from "./structureRCLCalc";
+import { placeTowers } from "./placeStructures/placeTowers";
+import { placeObserver } from "./placeStructures/placeObserver";
+import { placeRoadsToController } from "./placeStructures/placeRoadsToController";
 
 
 
@@ -102,12 +110,46 @@ export const structureIndex: StructureIndex = {
 
 export function mainRoom(){
     let roomMatrix = new PathFinder.CostMatrix()
-    let roomPosition = new RoomPosition(21, 22, 'sim')
+    let roomPosition = new RoomPosition(41, 10, 'sim')
     let RCL = 1
+
+    roomMatrix.set(roomPosition.x, roomPosition.y, 1)
+
 
     buildAnchor(roomMatrix, roomPosition, RCL)
     buildRapidFillCluster(roomMatrix, roomPosition, RCL)
     buildLabs(roomMatrix, roomPosition, RCL)
+    placeTowers(roomMatrix, roomPosition, RCL)
+    placeRoadsAroundStructs(roomMatrix, roomPosition, RCL)
+    placeTowers(roomMatrix, roomPosition, RCL)
+    placeObserver(roomMatrix, roomPosition, RCL)
+
+    let extension = 0
+    while (true){
+        for (let y = 0; y < 50; ++y) {
+            for (let x = 0; x < 50; ++x) {
+                if (getEmbededStructure(roomMatrix.get(x,y)) == 2){
+                    extension ++ 
+                }
+            }
+        }
+        placeRoadsAroundStructs(roomMatrix, roomPosition, RCL)
+        placeExtensions(roomMatrix, roomPosition, RCL, extension)
+        if (extension >= 60){
+            break
+        } else {
+            extension = 0
+        }
+    }
+
+    placeRoadsToSources(roomMatrix, roomPosition, RCL)
+    placeRoadsToController(roomMatrix, roomPosition, RCL)
+
+
+    console.log(extension)
+    
+    
+
 
 
     visualizeSetup(roomMatrix, 'sim')

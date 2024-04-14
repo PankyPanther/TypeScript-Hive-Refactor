@@ -25,7 +25,7 @@ export function labs(roomPosition: RoomPosition, roomMatrix: CostMatrix, RCL: nu
 
 export function buildLabs(roomMatrix: CostMatrix, roomPosition: RoomPosition, RCL: number){
     let pos = validStructurePos(distanceTransform(roomPosition.roomName, roomMatrix), distanceTransformRadial(roomPosition), 
-                roomPosition.roomName, 3, roomMatrix);
+                roomPosition.roomName, 2.5, roomMatrix);
 
     if (pos){
         labs(pos, roomMatrix, RCL)

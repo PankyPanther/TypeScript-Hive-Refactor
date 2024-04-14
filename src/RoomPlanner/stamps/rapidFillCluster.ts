@@ -45,7 +45,7 @@ function rapidFillCluster(roomPosition: RoomPosition, roomMatrix: CostMatrix, RC
 
 export function buildRapidFillCluster(roomMatrix: CostMatrix, roomPosition: RoomPosition, RCL: number){
     let pos = validStructurePos(distanceTransform(roomPosition.roomName, roomMatrix), distanceTransformRadial(roomPosition), 
-                roomPosition.roomName, 5, roomMatrix);
+                roomPosition.roomName, 3.5, roomMatrix);
 
     if (pos){
         rapidFillCluster(pos, roomMatrix, RCL)
