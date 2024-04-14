@@ -11,13 +11,8 @@ import { getEmbededStructure } from "./structureRCLCalc";
 import { placeTowers } from "./placeStructures/placeTowers";
 import { placeObserver } from "./placeStructures/placeObserver";
 import { placeRoadsToController } from "./placeStructures/placeRoadsToController";
+import { createSourceOutpost } from "./placeStructures/createSoruceOutpost";
 
-
-
-
-interface RCLBuildings {
-    number: [number: Structure[]],
-}
 
 
 interface StructureIndex {
@@ -43,47 +38,6 @@ interface StructureIndex {
     KeeperLair: number
 }
 
-const Buildings = {
-    1: {
-        placeContainers() {
-            
-        }
-    },
-    2: {
-        5: STRUCTURE_EXTENSION,
-        placeRoadsToSources(){
-
-        }
-    },
-    3: {
-        5: STRUCTURE_EXTENSION,
-        1: STRUCTURE_TOWER,
-    },
-    4: {
-        10: STRUCTURE_EXTENSION,
-        1: STRUCTURE_STORAGE,
-        placeRampartOnHighPrioBuildings(){
-
-        }
-    },
-    5: {
-        10: STRUCTURE_EXTENSION,
-        1: STRUCTURE_TOWER,
-        placeLinksOnSources(){
-
-        }
-    },
-    6: {
-        10: STRUCTURE_EXTENSION,
-        
-    },
-    7: {
-
-    },
-    8: {
-
-    },
-}
 
 export const structureIndex: StructureIndex = {
     Spawn: 1,
@@ -143,14 +97,8 @@ export function mainRoom(){
     }
 
     placeRoadsToSources(roomMatrix, roomPosition, RCL)
+    createSourceOutpost(roomMatrix, roomPosition, RCL)
     placeRoadsToController(roomMatrix, roomPosition, RCL)
-
-
-    console.log(extension)
     
-    
-
-
-
     visualizeSetup(roomMatrix, 'sim')
 }
