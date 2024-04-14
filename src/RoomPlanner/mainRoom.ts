@@ -1,10 +1,9 @@
-import { distanceTransformRadial } from "RoomPlanner/distanceTransformRadial";
-import { distanceTransform } from "RoomPlanner/distanceTransform";
-import { validStructurePos } from "RoomPlanner/validStructurePos";
+import { visualizeSetup } from "./visualizeSetup";
 
-import { rapidFillCluster } from "RoomPlanner/stamps/rapidFillCluster";
-import { embedRCLandStructure, getEmbededRCl, getEmbededStructure } from "./structureRCLCalc";
-import { get } from "lodash";
+import { buildRapidFillCluster } from "./stamps/rapidFillCluster";
+import { buildAnchor } from "./stamps/anchor";
+import { buildLabs } from "./stamps/labs";
+
 
 
 
@@ -102,16 +101,14 @@ export const structureIndex: StructureIndex = {
 };
 
 export function mainRoom(){
-    let pos = validStructurePos(distanceTransform('sim'), distanceTransformRadial('sim', 21, 22), 'sim', 5)
+    let roomMatrix = new PathFinder.CostMatrix()
+    let roomPosition = new RoomPosition(21, 22, 'sim')
+    let RCL = 1
 
-    if (pos){
-      rapidFillCluster(pos)
-    }
+    buildAnchor(roomMatrix, roomPosition, RCL)
+    buildRapidFillCluster(roomMatrix, roomPosition, RCL)
+    buildLabs(roomMatrix, roomPosition, RCL)
 
-    let num = embedRCLandStructure(8, structureIndex["Lab"])
-    
-    let rcl = getEmbededRCl(num)
-    let structure = getEmbededStructure(num)
 
-    console.log(rcl, structure)
+    visualizeSetup(roomMatrix, 'sim')
 }
