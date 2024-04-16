@@ -3,7 +3,7 @@ import { embedRCLandStructure } from "../structureRCLCalc";
 
 export function placeRoadsToSources(roomMatrix: CostMatrix, roomPosition: RoomPosition, RCL: number){
     for (let source of Game.rooms[roomPosition.roomName].find(FIND_SOURCES)) {
-        let path = roomPosition.findPathTo(source.pos, {
+        let path = source.pos.findPathTo(roomPosition, {
             costCallback: function(roomName, costMatrix) {
                 for (let y = 0; y < 50; ++y) {
                     for (let x = 0; x < 50; ++x) {
@@ -18,7 +18,7 @@ export function placeRoadsToSources(roomMatrix: CostMatrix, roomPosition: RoomPo
                 }
             }});
         path.pop()
-        path.pop()
+        path.shift()
         for (let step of path) {
             roomMatrix.set(step.x, step.y, embedRCLandStructure(RCL, 3))
         }

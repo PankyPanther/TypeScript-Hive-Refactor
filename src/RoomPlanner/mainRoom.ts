@@ -7,7 +7,7 @@ import { placeRoadsToSources } from "./placeStructures/placeRoadsToSources";
 import { placeRoadsAroundStructs } from "./placeStructures/placeRoadsAroundStructs";
 import { placeExtensions } from "./placeStructures/placeExtensions";
 
-import { getEmbededStructure } from "./structureRCLCalc";
+import { getEmbededRCl, getEmbededStructure } from "./structureRCLCalc";
 import { placeTowers } from "./placeStructures/placeTowers";
 import { placeObserver } from "./placeStructures/placeObserver";
 import { placeRoadsToController } from "./placeStructures/placeRoadsToController";
@@ -64,7 +64,7 @@ export const structureIndex: StructureIndex = {
 
 export function mainRoom(){
     let roomMatrix = new PathFinder.CostMatrix()
-    let roomPosition = new RoomPosition(41, 10, 'sim')
+    let roomPosition = new RoomPosition(42, 6, 'sim')
     let RCL = 1
 
     roomMatrix.set(roomPosition.x, roomPosition.y, 1)
@@ -99,6 +99,6 @@ export function mainRoom(){
     placeRoadsToSources(roomMatrix, roomPosition, RCL)
     createSourceOutpost(roomMatrix, roomPosition, RCL)
     placeRoadsToController(roomMatrix, roomPosition, RCL)
-    
+    console.log(getEmbededStructure(roomMatrix.get(42, 15)), getEmbededRCl(roomMatrix.get(42, 15)))
     visualizeSetup(roomMatrix, 'sim')
 }
