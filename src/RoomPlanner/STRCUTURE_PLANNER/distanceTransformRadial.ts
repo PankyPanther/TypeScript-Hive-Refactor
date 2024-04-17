@@ -1,6 +1,4 @@
 export function distanceTransformRadial(roomPosition: RoomPosition){
-    let vis = new RoomVisual(roomPosition.roomName);
-
     let topDownPass = new PathFinder.CostMatrix();
     for (let y = 0; y < 50; ++y) {
         for (let x = 0; x < 50; ++x) {

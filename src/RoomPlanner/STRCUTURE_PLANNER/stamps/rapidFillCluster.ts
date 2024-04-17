@@ -1,8 +1,8 @@
-import { distanceTransformRadial } from "RoomPlanner/distanceTransformRadial";
-import { distanceTransform } from "RoomPlanner/distanceTransform";
-import { validStructurePos } from "RoomPlanner/validStructurePos";
+import { distanceTransformRadial } from "RoomPlanner/STRCUTURE_PLANNER/distanceTransformRadial";
+import { distanceTransform } from "RoomPlanner/STRCUTURE_PLANNER/distanceTransform";
+import { validStructurePos } from "RoomPlanner/STRCUTURE_PLANNER/validStructurePos";
 
-import { embedRCLandStructure } from "RoomPlanner/structureRCLCalc";
+import { embedRCLandStructure } from "RoomPlanner/STRCUTURE_PLANNER/structureRCLCalc";
 
 function rapidFillCluster(roomPosition: RoomPosition, roomMatrix: CostMatrix){
     // radius 0

@@ -1,6 +1,4 @@
 export function distanceTransform(roomName: string, roomMatrix: CostMatrix) {
-    let vis = new RoomVisual(roomName);
-
     let topDownPass = new PathFinder.CostMatrix();
     for (let y = 0; y < 50; ++y) {
         for (let x = 0; x < 50; ++x) {

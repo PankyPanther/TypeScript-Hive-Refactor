@@ -1,18 +1,15 @@
-import { visualizeSetup } from "./visualizeSetup";
+import { buildRapidFillCluster } from "./STRCUTURE_PLANNER/stamps/rapidFillCluster";
+import { buildAnchor } from "./STRCUTURE_PLANNER/stamps/anchor";
+import { buildLabs } from "./STRCUTURE_PLANNER/stamps/labs";
+import { placeRoadsToSources } from "./STRCUTURE_PLANNER/placeStructures/placeRoadsToSources";
+import { placeRoadsAroundStructs } from "./STRCUTURE_PLANNER/placeStructures/placeRoadsAroundStructs";
+import { placeExtensions } from "./STRCUTURE_PLANNER/placeStructures/placeExtensions";
 
-import { buildRapidFillCluster } from "./stamps/rapidFillCluster";
-import { buildAnchor } from "./stamps/anchor";
-import { buildLabs } from "./stamps/labs";
-import { placeRoadsToSources } from "./placeStructures/placeRoadsToSources";
-import { placeRoadsAroundStructs } from "./placeStructures/placeRoadsAroundStructs";
-import { placeExtensions } from "./placeStructures/placeExtensions";
-
-import { getEmbededRCl, getEmbededStructure } from "./structureRCLCalc";
-import { placeTowers } from "./placeStructures/placeTowers";
-import { placeObserver } from "./placeStructures/placeObserver";
-import { placeRoadsToController } from "./placeStructures/placeRoadsToController";
-import { createSourceOutpost } from "./placeStructures/createSoruceOutpost";
-import { placeConstructionSites } from "./placeConstructionSites";
+import { getEmbededStructure } from "./STRCUTURE_PLANNER/structureRCLCalc";
+import { placeTowers } from "./STRCUTURE_PLANNER/placeStructures/placeTowers";
+import { placeObserver } from "./STRCUTURE_PLANNER/placeStructures/placeObserver";
+import { placeRoadsToController } from "./STRCUTURE_PLANNER/placeStructures/placeRoadsToController";
+import { createSourceOutpost } from "./STRCUTURE_PLANNER/placeStructures/createSoruceOutpost";
 
 
 
@@ -63,10 +60,18 @@ const structureIndex: StructureIndex = {
     KeeperLair: 20
 };
 
-export function mainRoom(){
+export function mainRoomPlanner(room: Room): CostMatrix{
     let roomMatrix = new PathFinder.CostMatrix()
-    let roomPosition = new RoomPosition(42, 6, 'sim')
-    let RCL = 1
+    let roomPosition
+
+    let spawn = room.find(FIND_MY_SPAWNS)[0]
+
+    if(spawn){
+        roomPosition = new RoomPosition(spawn.pos.x, spawn.pos.y, room.name)
+    } else {
+        roomPosition = new RoomPosition(25, 25, room.name)
+    }
+
 
     roomMatrix.set(roomPosition.x, roomPosition.y, 1)
 
@@ -90,7 +95,7 @@ export function mainRoom(){
             }
         }
         placeRoadsAroundStructs(roomMatrix, roomPosition)
-        placeExtensions(roomMatrix, roomPosition, RCL, extension)
+        placeExtensions(roomMatrix, roomPosition, extension)
         if (extension >= 60){
             break
         } else {
@@ -101,10 +106,6 @@ export function mainRoom(){
     placeRoadsToSources(roomMatrix, roomPosition)
     createSourceOutpost(roomMatrix, roomPosition)
     placeRoadsToController(roomMatrix, roomPosition)
-    console.log(getEmbededStructure(roomMatrix.get(42, 15)), getEmbededRCl(roomMatrix.get(42, 15)))
-    visualizeSetup(roomMatrix, 'sim')
 
-    console.log(getEmbededRCl(roomMatrix.get(44,6)))
-
-    placeConstructionSites(Game.rooms[roomPosition.roomName], 8, roomMatrix)
+    return roomMatrix
 }

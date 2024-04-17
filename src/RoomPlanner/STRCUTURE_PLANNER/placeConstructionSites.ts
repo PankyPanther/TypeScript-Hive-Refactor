@@ -25,11 +25,14 @@ const structureIndex = {
 };
 
 export function placeConstructionSites(room: Room, RCL: number, roomMatrix: CostMatrix){
+    let vis = new RoomVisual(room.name);
     for (let y = 0; y < 50; ++y) {
         for (let x = 0; x < 50; ++x) {
             if (getEmbededRCl(roomMatrix.get(x, y)) <= RCL){
                 let struct = structureIndex[getEmbededStructure(roomMatrix.get(x,y)) as keyof typeof structureIndex]
                 if (struct){
+                    vis.circle(x, y, {fill: '#ffffff'})
+                    console.log(room.createConstructionSite(x, y, struct), struct)
                     room.createConstructionSite(x, y, struct)
                 }
             }

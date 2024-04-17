@@ -1,7 +1,7 @@
 import { checkRadiusAround } from "../checkForStructRAD";
 import { embedRCLandStructure } from "../structureRCLCalc";
 
-export function placeExtensions(roomMatrix: CostMatrix, roomPosition: RoomPosition, RCL: number, amount: number){
+export function placeExtensions(roomMatrix: CostMatrix, roomPosition: RoomPosition, amount: number){
     let count = amount
     for (let y = 0; y < 50; ++y) {
         for (let x = 0; x < 50; ++x) {

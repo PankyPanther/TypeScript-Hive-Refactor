@@ -1,5 +1,4 @@
 export function validStructurePos(distanceTransform: CostMatrix, distanceTransformRadial: CostMatrix, roomName: string, radius: number, roomMatrix: CostMatrix): RoomPosition | null{
-    let vis = new RoomVisual(roomName);
     for (let i = 0; i < 25; i++) {
         for (let y = 0; y < 50; ++y) {
             for (let x = 0; x < 50; ++x) {
@@ -7,7 +6,6 @@ export function validStructurePos(distanceTransform: CostMatrix, distanceTransfo
                     && distanceTransformRadial.get(x, y) <= i
                     && roomMatrix.get(x,y) == 0)
                 {
-                    vis.circle(x, y, {fill: "#00FFFF"})
                     return new RoomPosition(x, y, roomName)
                 }
             }

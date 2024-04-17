@@ -1,4 +1,4 @@
-import { getEmbededStructure } from "./structureRCLCalc";
+import { getEmbededStructure } from "./STRCUTURE_PLANNER/structureRCLCalc";
 
 interface NumberColorMap {
     [key: number]: string;
