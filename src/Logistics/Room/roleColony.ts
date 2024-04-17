@@ -4,7 +4,7 @@ import { storeRoomPlanInMem } from "RoomPlanner/StoreRoomInMem";
 import { getRoomPlan } from "RoomPlanner/getRoomPlan";
 import { visualizeSetup } from "RoomPlanner/visualizeSetup";
 
-const roleHome: RoomRole = {
+const roleColony: RoomRole = {
     run: function(room) {
         let CM = getRoomPlan(room)
         visualizeSetup(CM, room.name)
@@ -12,4 +12,4 @@ const roleHome: RoomRole = {
 };
 
 
-export default roleHome
+export default roleColony

@@ -10,7 +10,7 @@ export function initialize(room: Room): void {
     let spawns = room.find(FIND_MY_STRUCTURES, { filter: s => s.structureType === STRUCTURE_SPAWN });
     
     if (spawns.length) {
-        room.memory.role = 'home'
+        room.memory.role = 'Colony'
     } else {
         room.memory.role = 'explored'
     }

@@ -25,7 +25,7 @@ export function labs(roomPosition: RoomPosition, roomMatrix: CostMatrix){
 
 export function buildLabs(roomMatrix: CostMatrix, roomPosition: RoomPosition){
     let pos = validStructurePos(distanceTransform(roomPosition.roomName, roomMatrix), distanceTransformRadial(roomPosition), 
-                roomPosition.roomName, 2.5, roomMatrix);
+                roomPosition.roomName, 3, roomMatrix);
 
     if (pos){
         labs(pos, roomMatrix)

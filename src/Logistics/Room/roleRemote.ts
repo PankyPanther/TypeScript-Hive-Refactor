@@ -1,10 +1,10 @@
 import { RoomRole } from "definitions";
 
-const roleExplored: RoomRole = {
+const roleRemote: RoomRole = {
     run: function(room) {
 
     }
 };
 
 
-export default roleExplored
+export default roleRemote

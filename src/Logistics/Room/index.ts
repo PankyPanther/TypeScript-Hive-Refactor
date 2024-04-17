@@ -1,14 +1,15 @@
 import { RoomRole } from "definitions"
-import roleHome from "./roleHome"
-import roleExplored from "./roleExplored"
+
+import roleColony from "./roleColony"
+import roleRemote from "./roleRemote"
 
 interface RoleLookup {
     [roleName: string]: RoomRole 
 }
 
 const ROLES: RoleLookup = {
-    'explored': roleExplored,
-    'home': roleHome,
+    'Remote': roleRemote,
+    'Colony': roleColony,
 }
 
 export function getRole(room: Room) {
