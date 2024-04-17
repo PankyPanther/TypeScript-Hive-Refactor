@@ -12,6 +12,7 @@ import { placeTowers } from "./placeStructures/placeTowers";
 import { placeObserver } from "./placeStructures/placeObserver";
 import { placeRoadsToController } from "./placeStructures/placeRoadsToController";
 import { createSourceOutpost } from "./placeStructures/createSoruceOutpost";
+import { placeConstructionSites } from "./placeConstructionSites";
 
 
 
@@ -39,7 +40,7 @@ interface StructureIndex {
 }
 
 
-export const structureIndex: StructureIndex = {
+const structureIndex: StructureIndex = {
     Spawn: 1,
     Extension: 2,
     Road: 3,
@@ -70,13 +71,14 @@ export function mainRoom(){
     roomMatrix.set(roomPosition.x, roomPosition.y, 1)
 
 
-    buildAnchor(roomMatrix, roomPosition, RCL)
-    buildRapidFillCluster(roomMatrix, roomPosition, RCL)
-    buildLabs(roomMatrix, roomPosition, RCL)
-    placeTowers(roomMatrix, roomPosition, RCL)
-    placeRoadsAroundStructs(roomMatrix, roomPosition, RCL)
-    placeTowers(roomMatrix, roomPosition, RCL)
-    placeObserver(roomMatrix, roomPosition, RCL)
+    buildAnchor(roomMatrix, roomPosition)
+    buildRapidFillCluster(roomMatrix, roomPosition)
+    buildLabs(roomMatrix, roomPosition)
+
+    placeTowers(roomMatrix, roomPosition)
+    placeRoadsAroundStructs(roomMatrix, roomPosition)
+    placeTowers(roomMatrix, roomPosition)
+    placeObserver(roomMatrix, roomPosition)
 
     let extension = 0
     while (true){
@@ -87,7 +89,7 @@ export function mainRoom(){
                 }
             }
         }
-        placeRoadsAroundStructs(roomMatrix, roomPosition, RCL)
+        placeRoadsAroundStructs(roomMatrix, roomPosition)
         placeExtensions(roomMatrix, roomPosition, RCL, extension)
         if (extension >= 60){
             break
@@ -96,9 +98,13 @@ export function mainRoom(){
         }
     }
 
-    placeRoadsToSources(roomMatrix, roomPosition, RCL)
-    createSourceOutpost(roomMatrix, roomPosition, RCL)
-    placeRoadsToController(roomMatrix, roomPosition, RCL)
+    placeRoadsToSources(roomMatrix, roomPosition)
+    createSourceOutpost(roomMatrix, roomPosition)
+    placeRoadsToController(roomMatrix, roomPosition)
     console.log(getEmbededStructure(roomMatrix.get(42, 15)), getEmbededRCl(roomMatrix.get(42, 15)))
     visualizeSetup(roomMatrix, 'sim')
+
+    console.log(getEmbededRCl(roomMatrix.get(44,6)))
+
+    placeConstructionSites(Game.rooms[roomPosition.roomName], 8, roomMatrix)
 }

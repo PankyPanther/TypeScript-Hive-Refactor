@@ -1,7 +1,7 @@
 import { getEmbededStructure } from "../structureRCLCalc";
 import { embedRCLandStructure } from "../structureRCLCalc";
 
-export function placeRoadsToSources(roomMatrix: CostMatrix, roomPosition: RoomPosition, RCL: number){
+export function placeRoadsToSources(roomMatrix: CostMatrix, roomPosition: RoomPosition){
     for (let source of Game.rooms[roomPosition.roomName].find(FIND_SOURCES)) {
         let path = source.pos.findPathTo(roomPosition, {
             costCallback: function(roomName, costMatrix) {
@@ -20,7 +20,7 @@ export function placeRoadsToSources(roomMatrix: CostMatrix, roomPosition: RoomPo
         path.pop()
         path.shift()
         for (let step of path) {
-            roomMatrix.set(step.x, step.y, embedRCLandStructure(RCL, 3))
+            roomMatrix.set(step.x, step.y, embedRCLandStructure(3, 3))
         }
     }
 }

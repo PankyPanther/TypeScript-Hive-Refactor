@@ -1,7 +1,7 @@
 import { getEmbededStructure } from "../structureRCLCalc";
 import { embedRCLandStructure } from "../structureRCLCalc";
 
-export function placeRoadsToController(roomMatrix: CostMatrix, roomPosition: RoomPosition, RCL: number){
+export function placeRoadsToController(roomMatrix: CostMatrix, roomPosition: RoomPosition){
     let controller = Game.rooms[roomPosition.roomName].controller
     if (controller){
         let path = controller.pos.findPathTo(roomPosition, {
@@ -20,7 +20,7 @@ export function placeRoadsToController(roomMatrix: CostMatrix, roomPosition: Roo
             }});
         path.pop()
         for (let step of path) {
-            roomMatrix.set(step.x, step.y, embedRCLandStructure(RCL, 3))
+            roomMatrix.set(step.x, step.y, embedRCLandStructure(3, 3))
         }
         
     }
