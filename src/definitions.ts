@@ -1,4 +1,3 @@
-
 declare global {
     interface RoomMemory {
         roomPlan?: number[]
@@ -15,6 +14,7 @@ declare global {
         workRoom: Room
         homeRoom: string
         tasks: string[]
+        target: string | undefined
     }
 }
 
@@ -27,8 +27,16 @@ export interface OverLord {
 }
 
 export interface Task {
-    run(room: Room, target: string): void
+    run(room: Room, target: string, creep: Creep): void
+    getTarget?(room: Room): string
+    name: string
 }
+
+export interface TaskLookup {
+    [taskName: string]: Task
+}
+
+
 
 export const WhiteList: string[] = ["BobGuo"];
 
