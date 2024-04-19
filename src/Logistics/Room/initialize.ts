@@ -11,6 +11,8 @@ export function initialize(room: Room): void {
     
     if (spawns.length) {
         room.memory.role = 'Colony'
+        room.memory.OverSeer = []
+        room.memory.OverSeer.push('BootStrap')
     } else {
         room.memory.role = 'explored'
     }

@@ -103,6 +103,7 @@ export function mainRoomPlanner(room: Room): CostMatrix{
         }
     }
 
+    placeRoadsAroundStructs(roomMatrix, roomPosition)
     placeRoadsToSources(roomMatrix, roomPosition)
     createSourceOutpost(roomMatrix, roomPosition)
     placeRoadsToController(roomMatrix, roomPosition)
