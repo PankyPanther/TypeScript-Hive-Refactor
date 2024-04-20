@@ -3,7 +3,7 @@ declare global {
         roomPlan?: number[]
         role: string
         lastEntered: number
-        OverSeer?: string[]
+        OverSeer?: [string]
     }
 }
 
@@ -28,7 +28,7 @@ export interface OverLord {
 
 export interface Task {
     run(room: Room, target: string, creep: Creep): void
-    getTarget?(room: Room): string
+    getTarget?(room: Room): string | undefined
     name: string
 }
 

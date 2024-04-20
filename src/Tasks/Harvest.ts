@@ -1,5 +1,7 @@
 import { Task } from "definitions";
 import goTo from "./goTo";
+import drop from "./drop";
+import deposite from "./Deposit";
 
 const harvest: Task = {
     name: 'harvest',
@@ -16,6 +18,15 @@ const harvest: Task = {
         if (creep.store.getFreeCapacity() == 0) {
             creep.memory.tasks.shift()
             creep.memory.target = ''
+
+            for (let creepName in Memory.creeps){
+                if (Game.creeps[creepName].memory.role === 'Filler'){
+                    creep.memory.tasks.unshift(drop.name)
+                    return
+                }
+            }
+
+            // creep.memory.tasks.unshift(deposite.name)
         }
     },
 

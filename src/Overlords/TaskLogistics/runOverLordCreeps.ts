@@ -1,14 +1,18 @@
+
 import { creepFinder } from "./creepFinder"
-import { Task } from "definitions"
 import { TaskLookup } from "definitions"
 import deposite from "Tasks/Deposit"
 import goTo from "Tasks/goTo"
 import harvest from "Tasks/Harvest"
+import pickup from "Tasks/Pickup"
+import drop from "Tasks/drop"
 
 const TLookup: TaskLookup = {
     'harvest': harvest,
     'goTo': goTo,
-    'deposite': deposite
+    'deposite': deposite,
+    'pickup': pickup,
+    'drop': drop
 }
 
 export function runOverLordCreeps(creepJob: string, overLord: string, defaultTasks: string[], room: Room): void {
@@ -32,9 +36,8 @@ export function runOverLordCreeps(creepJob: string, overLord: string, defaultTas
                 }
 
             }
-            
+
             if (creep.memory.target){
-                console.log(TLookup[Tasks[0]].name)
                 TLookup[Tasks[0]].run(room, creep.memory.target, creep)
             }
 
