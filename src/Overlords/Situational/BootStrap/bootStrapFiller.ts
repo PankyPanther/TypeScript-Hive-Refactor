@@ -1,3 +1,3 @@
-export function bootStrapFiller(room: Room){
+export function bootStrapFiller(room: Room, creepsName: string[]){
 
 }

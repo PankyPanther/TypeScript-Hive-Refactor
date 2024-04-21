@@ -3,14 +3,15 @@ declare global {
         roomPlan?: number[]
         role: string
         lastEntered: number
-        OverSeer?: [string]
+        OverLord?: [string]
+        overLordData?: {[overLordName: string]: overLordCreepJob}
     }
 }
 
 declare global {
     interface CreepMemory {
         role: string
-        overSeer: overSeer 
+        overLord: string
         workRoom: Room
         homeRoom: string
         tasks: string[]
@@ -23,6 +24,7 @@ export interface RoomRole {
 }
 
 export interface OverLord {
+    name: string
     run(room: Room): void
 }
 
@@ -36,12 +38,13 @@ export interface TaskLookup {
     [taskName: string]: Task
 }
 
-interface overSeer {
-    overLords: string[]
-    overLordData: {[overLordName: string]: number}
+interface overLordCreepJob {
+    [creepJob: string]: overLordCreepAmount
 }
 
-
+interface overLordCreepAmount {
+    targetAmount: number
+}
 
 export const WhiteList: string[] = ["BobGuo"];
 

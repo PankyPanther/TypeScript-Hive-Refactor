@@ -15,7 +15,7 @@ const OVERLORDS: OverLordLookUp = {
 }
 
 export function getOverLords(room: Room) {
-    const overLordArray = room.memory.OverSeer
+    const overLordArray = room.memory.OverLord
     if (!overLordArray?.length) {
         throw new Error(`There is no OverLord defined for room: ${room}`)
     }
