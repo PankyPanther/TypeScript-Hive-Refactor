@@ -8,6 +8,7 @@
 /dist
 /.rpt2_cache
 /tsc-out
+/node_modules
 /_book
 /build/*
 

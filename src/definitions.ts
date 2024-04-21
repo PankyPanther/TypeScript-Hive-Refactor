@@ -10,7 +10,7 @@ declare global {
 declare global {
     interface CreepMemory {
         role: string
-        overLord: string
+        overSeer: overSeer 
         workRoom: Room
         homeRoom: string
         tasks: string[]
@@ -34,6 +34,11 @@ export interface Task {
 
 export interface TaskLookup {
     [taskName: string]: Task
+}
+
+interface overSeer {
+    overLords: string[]
+    overLordData: {[overLordName: string]: number}
 }
 
 
