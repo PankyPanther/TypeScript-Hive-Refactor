@@ -2,36 +2,36 @@ import { Task } from "definitions";
 
 import goTo from "./goTo";
 
-export const harvest: Task = {
-    name: 'harvest',
+export const supply: Task = {
+    name: 'supply',
     run: function(room, target, creep) {
-        creep.say('harvest')
-        
+        creep.say('supply')
+
         if (!creep.memory.target){
             let fetchedTarget = this.getTarget!(room)
             if (fetchedTarget){
                 creep.memory.target = fetchedTarget
             }
         }
-
-        let TPOS = Game.getObjectById<Source>(target)
+        
+        let TPOS = Game.getObjectById<Structure>(target)
         if (TPOS){
-            if (creep.harvest(TPOS) === ERR_NOT_IN_RANGE){
+            if (creep.transfer(TPOS, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE){
                 creep.memory.tasks.unshift(goTo.name)
                 return
             }
     
-            creep.harvest(TPOS)
+            creep.transfer(TPOS, RESOURCE_ENERGY)
         }
 
-        if (creep.store.getFreeCapacity() == 0){
+        if (creep.store[RESOURCE_ENERGY] == 0){
             creep.memory.tasks.shift()
             creep.memory.target = ''
         }
     }, 
     getTarget: function(room){
-        return room.find(FIND_SOURCES)[0].id
+        return room.find(FIND_MY_SPAWNS)[0].id
     }
 };
 
-export default harvest
+export default supply

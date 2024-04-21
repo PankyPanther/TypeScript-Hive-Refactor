@@ -15,7 +15,7 @@ declare global {
         workRoom: Room
         homeRoom: string
         tasks: string[]
-        target: string | undefined
+        target: string 
     }
 }
 
