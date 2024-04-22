@@ -13,7 +13,6 @@ export function initialize(room: Room): void {
         room.memory.role = 'Colony'
         room.memory.OverLord = ['']
         room.memory.OverLord!.push('BootStrap')
-        room.memory.OverLord!.push('Core')
         room.memory.OverLord.shift()
         room.memory.overLordData = {
             'BootStrap': {
@@ -22,6 +21,12 @@ export function initialize(room: Room): void {
                 },
                 'Filler': {
                     targetAmount: 1
+                },
+                'Upgrader': {
+                    targetAmount: 2
+                },
+                'Worker': {
+                    targetAmount: 2
                 }
             }
         }

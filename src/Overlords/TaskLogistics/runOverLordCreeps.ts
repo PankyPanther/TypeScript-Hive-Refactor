@@ -6,13 +6,15 @@ import goTo from "Tasks/goTo"
 import supply from "Tasks/supply"
 import drop from "Tasks/drop"
 import pickup from "Tasks/pickup"
+import upgrade from "Tasks/upgrade"
 
 const TLookup: TaskLookup = {
     'harvest': harvest,
     'goTo': goTo,
     'supply': supply,
     'drop': drop,
-    'pickup': pickup
+    'pickup': pickup,
+    'upgrade': upgrade
 }
 
 export function runOverLordCreeps(creepJob: string, overLord: string, defaultTasks: string[], room: Room): void {
