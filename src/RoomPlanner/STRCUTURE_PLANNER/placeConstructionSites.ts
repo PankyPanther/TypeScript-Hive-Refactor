@@ -32,7 +32,6 @@ export function placeConstructionSites(room: Room, RCL: number, roomMatrix: Cost
                 let struct = structureIndex[getEmbededStructure(roomMatrix.get(x,y)) as keyof typeof structureIndex]
                 if (struct){
                     vis.circle(x, y, {fill: '#ffffff'})
-                    console.log(room.createConstructionSite(x, y, struct), struct)
                     room.createConstructionSite(x, y, struct)
                 }
             }

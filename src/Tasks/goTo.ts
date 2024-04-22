@@ -1,4 +1,5 @@
 import { Task } from "definitions";
+import { range } from "lodash";
 
 export const goTo: Task = {
     name: 'goTo',
@@ -6,6 +7,12 @@ export const goTo: Task = {
         creep.say('goTo')
         let TPOS = Game.getObjectById<Source | Structure>(target)
         if(TPOS){
+            if(creep.memory.tasks[1] === 'upgrade'){
+                if (creep.pos.inRangeTo(TPOS, 3)){
+                    creep.memory.tasks.shift()
+                    return
+                }
+            }
             if (creep.pos.isNearTo(TPOS)){
                 creep.memory.tasks.shift()
                 return

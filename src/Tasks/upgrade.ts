@@ -21,9 +21,10 @@ export const upgrade: Task = {
             creep.upgradeController(TPOS)
         }
 
-        if (creep.store.getFreeCapacity() == 0){
+        if (creep.store[RESOURCE_ENERGY] == 0){
             creep.memory.tasks.shift()
             creep.memory.target = ''
+            return
         }
     }
 };

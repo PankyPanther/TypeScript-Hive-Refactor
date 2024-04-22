@@ -14,6 +14,7 @@ import supply from "Tasks/supply";
 import pickup from "Tasks/pickup";
 import upgrade from "Tasks/upgrade";
 import { bootStrapUpgrader } from "./BootStrap/bootStrapUpgrader";
+import build from "Tasks/build";
 
 const roleBootSrap: OverLord = {
     name: 'BootStrap',
@@ -21,11 +22,15 @@ const roleBootSrap: OverLord = {
         const MinerTasks = [harvest.name]
         const FillerTasks = [pickup.name, supply.name]
         const UpgraderTasks = [pickup.name, upgrade.name]
+        const WorkerTasks = [pickup.name, build.name]
 
         const overLordData = room.memory.overLordData![roleBootSrap.name]
         const minerAmount = creepFinder('Miner', roleBootSrap.name)
         const fillerAmount = creepFinder('Filler', roleBootSrap.name)
         const upgraderAmount = creepFinder('Upgrader', roleBootSrap.name)
+        const workerAmount = creepFinder('Worker', roleBootSrap.name)
+
+        console.log(workerAmount)
 
         if (minerAmount.length < overLordData['Miner'].targetAmount){
             spawnCreep([MOVE, CARRY, WORK, WORK], `KIPM${Game.time}`, 
@@ -39,20 +44,25 @@ const roleBootSrap: OverLord = {
             spawnCreep([MOVE, CARRY, WORK, WORK], `KIPU${Game.time}`, 
                 {role: 'Upgrader', overLord: roleBootSrap.name, workRoom: room, homeRoom: room.name, tasks: [], target: ''}, room)
         }
-        // else if (fillerAmount.length < overLordData['Worker'].targetAmount){
-        //     spawnCreep([MOVE, CARRY, WORK, WORK], `KIPU${Game.time}`, 
-        //         {role: 'Worker', overLord: roleBootSrap.name, workRoom: room, homeRoom: room.name, tasks: [], target: ''}, room)
-        // }
+        else if (workerAmount.length < overLordData['Worker'].targetAmount){
+            spawnCreep([MOVE, CARRY, WORK, WORK], `KIPW${Game.time}`, 
+                {role: 'Worker', overLord: roleBootSrap.name, workRoom: room, homeRoom: room.name, tasks: [], target: ''}, room)
+        }
         else {
 
         }
+
 
         if(fillerAmount){
             bootStrapFiller(room, fillerAmount, FillerTasks)
         }
 
-        if(fillerAmount){
-            bootStrapUpgrader(room, fillerAmount, FillerTasks)
+        if(workerAmount){
+            bootStrapFiller(room, workerAmount, WorkerTasks)
+        }
+
+        if(upgraderAmount){
+            bootStrapUpgrader(room, upgraderAmount, UpgraderTasks)
         }
 
         if(minerAmount){
