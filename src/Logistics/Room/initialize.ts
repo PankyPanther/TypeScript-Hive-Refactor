@@ -26,7 +26,7 @@ export function initialize(room: Room): void {
                     targetAmount: 2
                 },
                 'Worker': {
-                    targetAmount: 5
+                    targetAmount: 7
                 }
             }
         }
