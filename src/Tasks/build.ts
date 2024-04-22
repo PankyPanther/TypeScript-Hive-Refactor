@@ -15,6 +15,7 @@ export const build: Task = {
         }
         
         let TPOS = Game.getObjectById(target) as ConstructionSite<BuildableStructureConstant>
+        console.log(TPOS)
         if (TPOS){
             if (creep.build(TPOS) === ERR_NOT_IN_RANGE){
                 creep.memory.tasks.unshift(goTo.name)

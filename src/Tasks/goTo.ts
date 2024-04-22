@@ -6,6 +6,14 @@ export const goTo: Task = {
     run: function(room, target, creep) {
         creep.say('goTo')
         let TPOS = Game.getObjectById<Source | Structure>(target)
+        console.log(TPOS)
+
+        if (!creep.memory.target || TPOS === null){
+            creep.memory.target = ''
+            creep.memory.tasks.shift()
+            return
+        }
+
         if(TPOS){
             if(creep.memory.tasks[1] === 'upgrade'){
                 if (creep.pos.inRangeTo(TPOS, 3)){
@@ -19,7 +27,8 @@ export const goTo: Task = {
             }
     
             creep.moveTo(TPOS)
-        }
+        } 
+
     }
 };
 
