@@ -77,7 +77,6 @@ export function mainRoomPlanner(room: Room): CostMatrix{
 
 
     buildAnchor(roomMatrix, roomPosition)
-    createSourceOutpost(roomMatrix, roomPosition)
     buildRapidFillCluster(roomMatrix, roomPosition)
     buildLabs(roomMatrix, roomPosition)
 
@@ -107,6 +106,7 @@ export function mainRoomPlanner(room: Room): CostMatrix{
     placeRoadsAroundStructs(roomMatrix, roomPosition)
     placeRoadsToSources(roomMatrix, roomPosition)
     placeRoadsToController(roomMatrix, roomPosition)
+    createSourceOutpost(roomMatrix, roomPosition)
 
     return roomMatrix
 }

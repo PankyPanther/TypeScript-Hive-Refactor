@@ -16,6 +16,7 @@ export function placeRoadsToSources(roomMatrix: CostMatrix, roomPosition: RoomPo
                         }
                     }
                 }
+            this.maxRooms = 1
             }});
         path.pop()
         path.shift()

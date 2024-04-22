@@ -1,6 +1,7 @@
 import { OverLord } from "definitions"
 
 import roleBootSrap from "./Situational/roleBootStrap"
+import roleCore from "./Core/roleCore"
 
 
 
@@ -12,6 +13,7 @@ interface OverLordLookUp {
 
 const OVERLORDS: OverLordLookUp = {
     'BootStrap': roleBootSrap,
+    'Core': roleCore
 }
 
 export function getOverLords(room: Room) {

@@ -7,8 +7,8 @@ import { runOverLords } from "Overlords/OverSeer";
 
 const roleColony: RoomRole = {
     run: function(room) {
-        let CM = getRoomPlan(room)
-        visualizeSetup(CM, room.name)
+        // let CM = getRoomPlan(room)
+        // visualizeSetup(CM, room.name)
 
         runOverLords(room)
     }
