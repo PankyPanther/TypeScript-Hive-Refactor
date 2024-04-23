@@ -6,7 +6,6 @@ export const goTo: Task = {
     run: function(room, target, creep) {
         creep.say('goTo')
         let TPOS = Game.getObjectById<Source | Structure>(target)
-        console.log(TPOS)
 
         if (!creep.memory.target || TPOS === null){
             creep.memory.target = ''

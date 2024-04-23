@@ -11,6 +11,10 @@ const roleColony: RoomRole = {
         // let CM = getRoomPlan(room)
         // visualizeSetup(CM, room.name)
 
+        for(let flag of room.find(FIND_FLAGS)){
+            console.log(flag.name)
+        }
+
         DirectiveMain(room)
         runOverLords(room)
     }

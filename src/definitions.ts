@@ -1,6 +1,9 @@
+import { initial } from "lodash"
+
 declare global {
     interface RoomMemory {
         roomPlan?: number[]
+        currentRCL: number
         role: string
         lastEntered: number
         OverLord?: [string]
@@ -25,6 +28,7 @@ export interface RoomRole {
 
 export interface OverLord {
     name: string
+    init(room: Room): void
     run(room: Room): void
 }
 

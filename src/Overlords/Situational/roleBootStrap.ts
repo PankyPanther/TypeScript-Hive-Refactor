@@ -8,18 +8,39 @@ import { bootStrapMiner } from "./BootStrap/bootStrapMiner";
 import { bootStrapFiller } from "./BootStrap/bootStrapFiller";
 
 
-import harvest from "Tasks/harvest";
 import drop from "Tasks/drop";
 import supply from "Tasks/supply";
 import pickup from "Tasks/pickup";
 import upgrade from "Tasks/upgrade";
 import { bootStrapUpgrader } from "./BootStrap/bootStrapUpgrader";
 import build from "Tasks/build";
+import harvestBoot from "./BootStrap/bootstrapHarvest";
 
 const roleBootSrap: OverLord = {
+    init: function(room) {
+        room.memory.OverLord = ['']
+        room.memory.OverLord!.push('BootStrap')
+        room.memory.overLordData = {
+            'BootStrap': {
+                'Miner': {
+                    targetAmount: 2
+                },
+                'Filler': {
+                    targetAmount: 1
+                },
+                'Upgrader': {
+                    targetAmount: 2
+                },
+                'Worker': {
+                    targetAmount: 0
+                }
+            }
+        }
+        room.memory.OverLord.shift()
+    },
     name: 'BootStrap',
     run: function(room) {
-        const MinerTasks = [harvest.name]
+        const MinerTasks = [harvestBoot.name]
         const FillerTasks = [pickup.name, supply.name]
         const UpgraderTasks = [pickup.name, upgrade.name]
         const WorkerTasks = [pickup.name, build.name]
@@ -29,8 +50,6 @@ const roleBootSrap: OverLord = {
         const fillerAmount = creepFinder('Filler', roleBootSrap.name)
         const upgraderAmount = creepFinder('Upgrader', roleBootSrap.name)
         const workerAmount = creepFinder('Worker', roleBootSrap.name)
-
-        console.log(workerAmount)
 
         if (minerAmount.length < overLordData['Miner'].targetAmount){
             spawnCreep([MOVE, CARRY, WORK, WORK], `KIPM${Game.time}`, 
@@ -47,9 +66,6 @@ const roleBootSrap: OverLord = {
         else if (workerAmount.length < overLordData['Worker'].targetAmount){
             spawnCreep([MOVE, CARRY, WORK, WORK], `KIPW${Game.time}`, 
                 {role: 'Worker', overLord: roleBootSrap.name, workRoom: room, homeRoom: room.name, tasks: [], target: ''}, room)
-        }
-        else {
-
         }
 
 

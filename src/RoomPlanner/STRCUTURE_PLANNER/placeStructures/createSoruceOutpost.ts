@@ -13,6 +13,7 @@ export function createSourceOutpost(roomMatrix: CostMatrix, roomPosition: RoomPo
         let linkPos
         if (containerPos){
             roomMatrix.set(containerPos.x, containerPos.y, embedRCLandStructure(3, 14))
+            Game.rooms[roomPosition.roomName].createFlag(containerPos.x, containerPos.y, 'MiningSite-' + source.id, COLOR_GREY)
             linkPos = validStructurePos(distanceTransform(roomPosition.roomName, roomMatrix), distanceTransformRadial(containerPos), 
                 roomPosition.roomName, 1, roomMatrix);
         }

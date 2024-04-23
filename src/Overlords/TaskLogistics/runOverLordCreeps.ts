@@ -8,9 +8,11 @@ import drop from "Tasks/drop"
 import pickup from "Tasks/pickup"
 import upgrade from "Tasks/upgrade"
 import build from "Tasks/build"
+import harvestBoot from "Overlords/Situational/BootStrap/bootstrapHarvest"
 
 const TLookup: TaskLookup = {
     'harvest': harvest,
+    'harvestBoot': harvestBoot,
     'goTo': goTo,
     'supply': supply,
     'drop': drop,
