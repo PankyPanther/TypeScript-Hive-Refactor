@@ -1,6 +1,5 @@
 import { Task } from "definitions";
 
-import goTo from "Tasks/goTo";
 
 export const harvestBoot: Task = {
     name: 'harvestBoot',
@@ -17,7 +16,7 @@ export const harvestBoot: Task = {
         let TPOS = Game.getObjectById<Source>(target)
         if (TPOS){
             if (creep.harvest(TPOS) === ERR_NOT_IN_RANGE){
-                creep.memory.tasks.unshift(goTo.name)
+                creep.moveTo(TPOS)
                 return
             }
     

@@ -1,6 +1,5 @@
 import { Task } from "definitions";
 
-import goTo from "./goTo";
 
 export const upgrade: Task = {
     name: 'upgrade',
@@ -14,8 +13,7 @@ export const upgrade: Task = {
         let TPOS = creep.room.controller
         if (TPOS){
             if (creep.upgradeController(TPOS) === ERR_NOT_IN_RANGE){
-                creep.memory.tasks.unshift(goTo.name)
-                return
+                creep.moveTo(TPOS)
             }
     
             creep.upgradeController(TPOS)

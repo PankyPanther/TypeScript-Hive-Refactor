@@ -1,6 +1,5 @@
 import { Task } from "definitions";
 
-import goTo from "./goTo";
 
 export const build: Task = {
     name: 'build',
@@ -17,7 +16,7 @@ export const build: Task = {
         let TPOS = Game.getObjectById(target) as ConstructionSite<BuildableStructureConstant>
         if (TPOS){
             if (creep.build(TPOS) === ERR_NOT_IN_RANGE){
-                creep.memory.tasks.unshift(goTo.name)
+                creep.moveTo(TPOS)
                 return
             }
     

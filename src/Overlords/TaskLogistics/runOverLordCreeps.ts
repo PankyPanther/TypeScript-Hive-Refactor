@@ -2,7 +2,6 @@
 import harvest from "Tasks/harvest"
 import { creepFinder } from "./creepFinder"
 import { TaskLookup } from "definitions"
-import goTo from "Tasks/goTo"
 import supply from "Tasks/supply"
 import drop from "Tasks/drop"
 import pickup from "Tasks/pickup"
@@ -13,7 +12,6 @@ import harvestBoot from "Overlords/Situational/BootStrap/bootstrapHarvest"
 const TLookup: TaskLookup = {
     'harvest': harvest,
     'harvestBoot': harvestBoot,
-    'goTo': goTo,
     'supply': supply,
     'drop': drop,
     'pickup': pickup,

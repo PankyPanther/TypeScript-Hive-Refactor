@@ -1,6 +1,5 @@
 import { Task } from "definitions";
 
-import goTo from "./goTo";
 
 export const supply: Task = {
     name: 'supply',
@@ -11,8 +10,7 @@ export const supply: Task = {
 
         if (TPOS){
             if (creep.transfer(TPOS, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE){
-                creep.memory.tasks.unshift(goTo.name)
-                return
+                creep.moveTo(TPOS)
             }
     
             creep.transfer(TPOS, RESOURCE_ENERGY)

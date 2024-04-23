@@ -8,6 +8,7 @@ declare global {
         lastEntered: number
         OverLord?: [string]
         overLordData?: {[overLordName: string]: overLordCreepJob}
+        miningSites?: MiningSites
     }
 }
 
@@ -48,6 +49,23 @@ interface overLordCreepJob {
 
 interface overLordCreepAmount {
     targetAmount: number
+}
+
+
+
+export interface HiveClusters {
+    name: string
+    init(room: Room): void
+    isOpenSource(room: Room): boolean
+    getOpenSource(room: Room): string | undefined
+}
+
+export interface MiningSites {
+    [siteName: string]: MiningSite;
+}
+
+export interface MiningSite {
+    creepName: string;
 }
 
 export const WhiteList: string[] = ["BobGuo"];

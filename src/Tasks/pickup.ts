@@ -1,6 +1,5 @@
 import { Task } from "definitions";
 
-import goTo from "./goTo";
 
 export const pickup: Task = {
     name: 'pickup',
@@ -10,8 +9,7 @@ export const pickup: Task = {
         let TPOS = Game.getObjectById(target) as Resource<ResourceConstant>
         if (TPOS){
             if (creep.pickup(TPOS) === ERR_NOT_IN_RANGE){
-                creep.memory.tasks.unshift(goTo.name)
-                return
+                creep.moveTo(TPOS)
             }
     
             creep.pickup(TPOS)

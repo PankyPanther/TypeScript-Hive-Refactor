@@ -15,6 +15,7 @@ import upgrade from "Tasks/upgrade";
 import { bootStrapUpgrader } from "./BootStrap/bootStrapUpgrader";
 import build from "Tasks/build";
 import harvestBoot from "./BootStrap/bootstrapHarvest";
+import MiningSite from "Hive Clusters/MiningSite";
 
 const roleBootSrap: OverLord = {
     init: function(room) {
