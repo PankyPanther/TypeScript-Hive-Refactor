@@ -70,3 +70,19 @@ export interface MiningSite {
 
 export const WhiteList: string[] = ["BobGuo"];
 
+
+declare global {
+    interface RoomMemory {
+        roomPlan?: number[]
+        currentRCL: number
+        role: string
+        lastEntered: number
+        OverLord?: [string]
+        overLordData?: {[overLordName: string]: overLordCreepJob}
+        miningSites?: MiningSites
+    }
+}
+
+
+
+

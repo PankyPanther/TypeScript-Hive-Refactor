@@ -12,6 +12,8 @@ export const harvest: Task = {
             let fetchedTarget = this.getTarget!(room)
             if (fetchedTarget){
                 creep.memory.target = fetchedTarget
+                let flag = MiningSite.getOpenSource(room)
+                room.memory.miningSites![flag!].creepName = 'CREEP HERE STOP :('
             }
         }
 
@@ -20,7 +22,7 @@ export const harvest: Task = {
         if (flag){
             let source = flag.pos.findInRange(FIND_SOURCES, 1)[0]
 
-            if (creep.harvest(source) === ERR_NOT_IN_RANGE){
+            if (creep.pos != flag.pos){
                 creep.moveTo(flag.pos)
             }
     
@@ -34,8 +36,6 @@ export const harvest: Task = {
     }, 
     getTarget: function(room){
         if (MiningSite.isOpenSource(room)){
-            let flag = MiningSite.getOpenSource(room)
-            room.memory.miningSites![flag!].creepName = 'CREEP HERE STOP :('
             return MiningSite.getOpenSource(room)
         }
         return ''

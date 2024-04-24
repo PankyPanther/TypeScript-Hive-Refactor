@@ -26,10 +26,24 @@ export const build: Task = {
         if (creep.store[RESOURCE_ENERGY] == 0){
             creep.memory.tasks.shift()
             creep.memory.target = ''
+            return
+        }
+
+        if (!creep.memory.target || TPOS === null){
+            let fetchedTarget = this.getTarget!(room)
+            if (fetchedTarget){
+                creep.memory.target = fetchedTarget
+            }
         }
     }, 
     getTarget: function(room){
-        return room.find(FIND_CONSTRUCTION_SITES)[0].id
+        let sites = room.find(FIND_CONSTRUCTION_SITES)
+
+        if (sites.length){
+            return sites[0].id
+        }
+
+        return ''
     }
 };
 

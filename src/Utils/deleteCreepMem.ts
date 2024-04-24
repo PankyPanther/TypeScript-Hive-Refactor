@@ -1,10 +1,11 @@
 import { create } from "lodash";
 
-export function deleteCreepMemory(creep: CreepMemory){
-    let target = creep.target
-    for (let flag of creep.workRoom.find(FIND_FLAGS)){
+export function deleteCreepMemory(target: string, workRoom: Room){
+    for (let flag of Game.rooms[workRoom.name].find(FIND_FLAGS)){
+        console.log(target, flag.name)
         if (target === flag.name){
-            creep.workRoom.memory.miningSites![flag.name].creepName = ''
+            console.log('reestoring source mem')
+            Game.rooms[workRoom.name].memory.miningSites![flag.name].creepName = ''
         }
     }
 }

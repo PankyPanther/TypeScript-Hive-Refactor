@@ -1,6 +1,5 @@
 import { Task } from "definitions";
 
-
 export const pickup: Task = {
     name: 'pickup',
     run: function(room, target, creep) {
@@ -29,9 +28,12 @@ export const pickup: Task = {
         }
     }, 
     getTarget: function(room){
-        if (room.find(FIND_DROPPED_RESOURCES).length){
-            return room.find(FIND_DROPPED_RESOURCES)[0].id
+        let droppedSource = room.find(FIND_DROPPED_RESOURCES).sort((a, b) => b.amount - a.amount)
+
+        if (droppedSource.length){
+            return droppedSource[0].id
         }
+
         return ''
     }
 };

@@ -16,6 +16,7 @@ import { bootStrapUpgrader } from "./BootStrap/bootStrapUpgrader";
 import build from "Tasks/build";
 import harvestBoot from "./BootStrap/bootstrapHarvest";
 import MiningSite from "Hive Clusters/MiningSite";
+import roleCore from "Overlords/Core/roleCore";
 
 const roleBootSrap: OverLord = {
     init: function(room) {
@@ -33,7 +34,7 @@ const roleBootSrap: OverLord = {
                     targetAmount: 2
                 },
                 'Worker': {
-                    targetAmount: 0
+                    targetAmount: 10
                 }
             }
         }
@@ -52,21 +53,47 @@ const roleBootSrap: OverLord = {
         const upgraderAmount = creepFinder('Upgrader', roleBootSrap.name)
         const workerAmount = creepFinder('Worker', roleBootSrap.name)
 
-        if (minerAmount.length < overLordData['Miner'].targetAmount){
-            spawnCreep([MOVE, CARRY, WORK, WORK], `KIPM${Game.time}`, 
-                {role: 'Miner', overLord: roleBootSrap.name, workRoom: room, homeRoom: room.name, tasks: [], target: ''}, room)
-        }
-        else if (fillerAmount.length < overLordData['Filler'].targetAmount){
-            spawnCreep([MOVE,MOVE,MOVE, CARRY, CARRY, CARRY], `KIPF${Game.time}`, 
-                {role: 'Filler', overLord: roleBootSrap.name, workRoom: room, homeRoom: room.name, tasks: [], target: ''}, room)
-        }
-        else if (upgraderAmount.length < overLordData['Upgrader'].targetAmount){
-            spawnCreep([MOVE, CARRY, WORK, WORK], `KIPU${Game.time}`, 
-                {role: 'Upgrader', overLord: roleBootSrap.name, workRoom: room, homeRoom: room.name, tasks: [], target: ''}, room)
-        }
-        else if (workerAmount.length < overLordData['Worker'].targetAmount){
-            spawnCreep([MOVE, CARRY, WORK, WORK], `KIPW${Game.time}`, 
-                {role: 'Worker', overLord: roleBootSrap.name, workRoom: room, homeRoom: room.name, tasks: [], target: ''}, room)
+        let extensions = room.find(FIND_STRUCTURES).filter((struct) => {
+            return struct.structureType === STRUCTURE_EXTENSION
+        })
+
+        if (extensions.length < 5) {
+            if (minerAmount.length < overLordData['Miner'].targetAmount){
+                spawnCreep([MOVE, CARRY, WORK, WORK], `KIPM${Game.time}`, 
+                    {role: 'Miner', overLord: roleBootSrap.name, workRoom: room, homeRoom: room.name, tasks: [], target: ''}, room)
+            }
+            else if (fillerAmount.length < overLordData['Filler'].targetAmount){
+                spawnCreep([MOVE,MOVE,MOVE, CARRY, CARRY, CARRY], `KIPF${Game.time}`, 
+                    {role: 'Filler', overLord: roleBootSrap.name, workRoom: room, homeRoom: room.name, tasks: [], target: ''}, room)
+            }
+            else if (upgraderAmount.length < overLordData['Upgrader'].targetAmount){
+                spawnCreep([MOVE, CARRY, WORK, WORK], `KIPU${Game.time}`, 
+                    {role: 'Upgrader', overLord: roleBootSrap.name, workRoom: room, homeRoom: room.name, tasks: [], target: ''}, room)
+            }
+            else if (workerAmount.length < overLordData['Worker'].targetAmount){
+                spawnCreep([MOVE, CARRY, WORK, WORK], `KIPW${Game.time}`, 
+                    {role: 'Worker', overLord: roleBootSrap.name, workRoom: room, homeRoom: room.name, tasks: [], target: ''}, room)
+            }
+        } else { 
+
+            let isOverlordCore = room.memory.OverLord!.find((data) => {
+                if (data === roleCore.name){
+                    return data
+                }
+                return false
+            })
+
+            if (!isOverlordCore){
+                console.log('Removing ADDING CORE: ', room.name)
+                room.memory.OverLord!.push(roleCore.name)
+            }
+
+            if (!minerAmount.length && !fillerAmount.length && !upgraderAmount.length && !workerAmount.length && room.find(FIND_MY_CREEPS).length >= 3){
+                console.log('Removing BootStrap: ', room.name)
+                
+                room.memory.OverLord!.splice(room.memory.OverLord!.indexOf(roleBootSrap.name), 1)
+                delete room.memory.overLordData![roleBootSrap.name]
+            }
         }
 
 
@@ -91,6 +118,7 @@ const roleBootSrap: OverLord = {
 
             bootStrapMiner(room, minerAmount, MinerTasks)
         }
+        
     }
 };
 
