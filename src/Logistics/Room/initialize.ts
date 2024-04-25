@@ -1,4 +1,6 @@
 import roleBootSrap from "Overlords/Situational/roleBootStrap";
+import { getRoomPlan } from "RoomPlanner/getRoomPlan";
+import { placeConstructionSites } from "RoomPlanner/STRCUTURE_PLANNER/placeConstructionSites";
 
 export function isInitialize(room: Room): boolean {
     if (!room.memory.role) {
@@ -13,6 +15,7 @@ export function initialize(room: Room): void {
     
     if (spawns.length) {
         roleBootSrap.init(room)
+        getRoomPlan(room)
         room.memory.role = 'Colony'
 
     } else {

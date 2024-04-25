@@ -8,6 +8,7 @@ import pickup from "Tasks/pickup"
 import upgrade from "Tasks/upgrade"
 import build from "Tasks/build"
 import harvestBoot from "Overlords/Situational/BootStrap/bootstrapHarvest"
+import repair from "Tasks/repair"
 
 const TLookup: TaskLookup = {
     'harvest': harvest,
@@ -16,7 +17,8 @@ const TLookup: TaskLookup = {
     'drop': drop,
     'pickup': pickup,
     'upgrade': upgrade,
-    'build': build
+    'build': build,
+    'repair': repair
 }
 
 export function runOverLordCreeps(creepJob: string, overLord: string, defaultTasks: string[], room: Room): void {

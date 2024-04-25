@@ -5,10 +5,11 @@ import { runOverLordCreeps } from "Overlords/TaskLogistics/runOverLordCreeps";
 import harvest from "Tasks/harvest";
 import { spawnCreep } from "Utils/spawnCreep";
 import pickup from "Tasks/pickup";
-import { pick } from "lodash";
 import upgrade from "Tasks/upgrade";
 import MiningSite from "Hive Clusters/MiningSite";
 import supply from "Tasks/supply";
+import build from "Tasks/build";
+import repair from "Tasks/repair";
 
 const roleCore: OverLord = {
     init: function(room) {
@@ -17,10 +18,10 @@ const roleCore: OverLord = {
                 targetAmount: 0
             },
             'Worker': {
-                targetAmount: 0
+                targetAmount: 5
             },
             'Upgrader': {
-                targetAmount: 3
+                targetAmount: 6
             }
         }
     },
@@ -28,9 +29,9 @@ const roleCore: OverLord = {
     run: function(room) {
         const overLordData = room.memory.overLordData![roleCore.name]
 
-        // if(!room.memory.overLordData!['Core']){
+        if(!room.memory.overLordData!['Core']){
             roleCore.init(room)
-        // }
+        }
 
         const MinerTasks = [harvest.name, drop.name]
         const HaulerTasks = []
@@ -59,6 +60,11 @@ const roleCore: OverLord = {
                 {role: 'Upgrader', overLord: roleCore.name, workRoom: room, homeRoom: room.name, tasks: [], target: ''}, room)
         }
 
+        if (workerAmount.length < overLordData['Worker'].targetAmount){
+            spawnCreep([MOVE, MOVE, CARRY, CARRY, WORK, WORK, WORK, MOVE], `KIPW${Game.time}`, 
+                {role: 'Worker', overLord: roleCore.name, workRoom: room, homeRoom: room.name, tasks: [], target: ''}, room)
+        }
+
 
 
         if (minerAmount){
@@ -70,9 +76,19 @@ const roleCore: OverLord = {
         if (supplierAmount){
             runOverLordCreeps('Supplier', 'Core', SupplierTasks, room)
         }
-        // if (workerAmount){
-            
-        // }
+        if (workerAmount){
+            if (room.find(FIND_CONSTRUCTION_SITES).length){
+                console.log('sites')
+                WorkerTasks.push(build.name)
+                overLordData['Worker'].targetAmount = 5
+
+            } else {
+                WorkerTasks.push(repair.name)
+                overLordData['Worker'].targetAmount = 2
+            }
+
+            runOverLordCreeps('Worker', 'Core', WorkerTasks, room)
+        }
         if (upgraderAmount){
             runOverLordCreeps('Upgrader', 'Core', UpgraderTasks, room)
         }

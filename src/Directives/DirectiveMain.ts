@@ -7,7 +7,11 @@ export function DirectiveMain(room: Room): void {
     }
 
     if (room.controller?.level != room.memory.currentRCL){
-        // do something
+        placeConstructionSites(room, room.controller!.level, getRoomPlan(room))
         room.memory.currentRCL++
+    }
+
+    if (room.find(FIND_HOSTILE_CREEPS || FIND_HOSTILE_POWER_CREEPS).length){
+        
     }
 }
