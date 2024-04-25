@@ -4,7 +4,7 @@ import { Task } from "definitions";
 export const supply: Task = {
     name: 'supply',
     run: function(room, target, creep) {
-        creep.say('supply')
+        // creep.say('supply')
         
         let TPOS = Game.getObjectById<Structure>(target) as StructureSpawn | StructureExtension
 

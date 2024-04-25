@@ -3,7 +3,7 @@ import { Task } from "definitions";
 export const pickup: Task = {
     name: 'pickup',
     run: function(room, target, creep) {
-        creep.say('pickup')
+        // creep.say('pickup')
         
         let TPOS = Game.getObjectById(target) as Resource<ResourceConstant>
         if (TPOS){

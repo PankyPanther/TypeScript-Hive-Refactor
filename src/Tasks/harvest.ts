@@ -4,7 +4,7 @@ import MiningSite from "Hive Clusters/MiningSite";
 export const harvest: Task = {
     name: 'harvest',
     run: function(room, target, creep) {
-        creep.say('harvest')
+        // creep.say('harvest')
         
         let flag = Game.flags[target]
 

@@ -42,6 +42,10 @@ const roleBootSrap: OverLord = {
     },
     name: 'BootStrap',
     run: function(room) {
+        if(!room.memory.overLordData![roleBootSrap.name]){
+            roleBootSrap.init(room)
+        }
+
         const MinerTasks = [harvestBoot.name]
         const FillerTasks = [pickup.name, supply.name]
         const UpgraderTasks = [pickup.name, upgrade.name]

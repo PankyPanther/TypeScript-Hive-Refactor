@@ -4,7 +4,7 @@ import { Task } from "definitions";
 export const repair: Task = {
     name: 'repair',
     run: function(room, target, creep) {
-        creep.say('repair')
+        // creep.say('repair')
 
         let TPOS = Game.getObjectById<Structure>(target) as StructureRoad | StructureContainer
 

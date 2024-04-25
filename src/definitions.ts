@@ -1,4 +1,4 @@
-import { initial } from "lodash"
+export const controllerSign = 'You are not save from the trees'
 
 declare global {
     interface RoomMemory {

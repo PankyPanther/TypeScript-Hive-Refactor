@@ -4,7 +4,7 @@ import { Task } from "definitions";
 export const build: Task = {
     name: 'build',
     run: function(room, target, creep) {
-        creep.say('build')
+        // creep.say('build')
 
         if (!creep.memory.target){
             let fetchedTarget = this.getTarget!(room)
@@ -29,7 +29,7 @@ export const build: Task = {
             return
         }
 
-        if (!creep.memory.target || TPOS === null){
+        if (!creep.memory.target || TPOS === null || !room.find(FIND_CONSTRUCTION_SITES).length){
             let fetchedTarget = this.getTarget!(room)
             if (fetchedTarget){
                 creep.memory.target = fetchedTarget
