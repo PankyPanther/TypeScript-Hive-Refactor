@@ -1,6 +1,6 @@
 
 import harvest from "Tasks/harvest"
-import { creepFinder } from "./creepFinder"
+import { creepFinder } from "./TaskLogistics/creepFinder"
 import { TaskLookup } from "definitions"
 import supply from "Tasks/supply"
 import drop from "Tasks/drop"
@@ -10,6 +10,8 @@ import build from "Tasks/build"
 import harvestBoot from "Overlords/Situational/BootStrap/bootstrapHarvest"
 import repair from "Tasks/repair"
 import signController from "Tasks/sgnCtrllor"
+import withdraw from "Tasks/withdraw"
+import transfer from "Tasks/transfer"
 
 const TLookup: TaskLookup = {
     'harvest': harvest,
@@ -20,7 +22,9 @@ const TLookup: TaskLookup = {
     'upgrade': upgrade,
     'build': build,
     'repair': repair,
-    'signController': signController
+    'signController': signController,
+    'withdraw': withdraw,
+    'transfer': transfer
 }
 
 export function runOverLordCreeps(creepJob: string, overLord: string, defaultTasks: string[], room: Room): void {

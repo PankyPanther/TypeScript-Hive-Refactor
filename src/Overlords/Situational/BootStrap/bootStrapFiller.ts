@@ -1,4 +1,4 @@
-import { runOverLordCreeps } from "Overlords/TaskLogistics/runOverLordCreeps";
+import { runOverLordCreeps } from "Overlords/runOverLordCreeps";
 
 export function bootStrapFiller(room: Room, creepsName: string[], tasks: string[]){
     for (let creepName of creepsName){

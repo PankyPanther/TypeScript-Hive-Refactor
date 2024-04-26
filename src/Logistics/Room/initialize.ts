@@ -17,6 +17,7 @@ export function initialize(room: Room): void {
         roleBootSrap.init(room)
         getRoomPlan(room)
         room.memory.role = 'Colony'
+        room.memory.name = 'Colony-' + Game.time
 
     } else {
         room.memory.role = 'explored'

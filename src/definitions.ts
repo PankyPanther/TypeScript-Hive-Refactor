@@ -1,4 +1,4 @@
-export const controllerSign = 'You are not save from the trees'
+export const controllerSign = 'You are not safe from the trees'
 
 declare global {
     interface RoomMemory {
@@ -6,6 +6,7 @@ declare global {
         currentRCL: number
         role: string
         lastEntered: number
+        name: string
         OverLord?: [string]
         overLordData?: {[overLordName: string]: overLordCreepJob}
         miningSites?: MiningSites
@@ -18,6 +19,7 @@ declare global {
         overLord: string
         workRoom: Room
         homeRoom: string
+        colony: string
         tasks: string[]
         target: string 
     }

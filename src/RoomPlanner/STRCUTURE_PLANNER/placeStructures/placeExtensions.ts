@@ -11,7 +11,7 @@ export function placeExtensions(roomMatrix: CostMatrix, roomPosition: RoomPositi
                 count < 60
                 ) 
             {
-                roomMatrix.set(x,y, embedRCLandStructure(4, 2))
+                roomMatrix.set(x,y, embedRCLandStructure(5, 2))
                 count++
             }
         }
