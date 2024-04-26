@@ -32,17 +32,26 @@ export const supply: Task = {
 
     getTarget: function(room){
         let extensions = room.find(FIND_STRUCTURES).filter((extension) => {
-            return (extension.structureType === STRUCTURE_EXTENSION || extension.structureType === STRUCTURE_TOWER) && extension.store.getFreeCapacity(RESOURCE_ENERGY) > 0
+            return (extension.structureType === STRUCTURE_EXTENSION) && extension.store.getFreeCapacity(RESOURCE_ENERGY) > 0
         });
+
         if (extensions.length){
             return extensions[0].id
         }
-    
 
         let spawn = room.find(FIND_MY_SPAWNS)[0];
         if (spawn && spawn.store.energy < 300) {
             return room.find(FIND_MY_SPAWNS)[0].id
         }
+
+        let towers = room.find(FIND_STRUCTURES).filter((extension) => {
+            return (extension.structureType === STRUCTURE_TOWER) && extension.store.getFreeCapacity(RESOURCE_ENERGY) > 0
+        });
+
+        if (towers.length){
+            return towers[0].id
+        }
+    
         return ''
     }
 };

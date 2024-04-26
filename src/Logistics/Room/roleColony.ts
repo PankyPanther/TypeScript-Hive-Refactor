@@ -6,6 +6,7 @@ import { visualizeSetup } from "RoomPlanner/visualizeSetup";
 import { runOverLords } from "Overlords/OverSeer";
 import { DirectiveMain } from "Directives/DirectiveMain";
 import { roomEconomyScorer } from "Logistics/roomEconomyScore";
+import { getBody } from "Utils/getBody";
 
 const roleColony: RoomRole = {
     run: function(room) {

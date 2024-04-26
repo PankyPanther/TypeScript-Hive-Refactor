@@ -14,7 +14,7 @@ export function roomEconomyScorer(room: Room) {
                 colonyEnergy += creepWorkParts
             }
             else {
-                colonyEnergy -= (creepWorkParts / 2)
+                colonyEnergy -= (creepWorkParts / 4)
             }
         }
     }

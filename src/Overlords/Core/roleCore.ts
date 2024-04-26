@@ -13,6 +13,7 @@ import repair from "Tasks/repair";
 import { pick } from "lodash";
 import transfer from "Tasks/transfer";
 import withdraw from "Tasks/withdraw";
+import { getBody } from "Utils/getBody";
 
 const roleCore: OverLord = {
     init: function(room) {
@@ -24,13 +25,14 @@ const roleCore: OverLord = {
                 targetAmount: 5
             },
             'Upgrader': {
-                targetAmount: 6
+                targetAmount: 10
             }
         }
     },
     name: 'Core',
     run: function(room) {
         const overLordData = room.memory.overLordData![roleCore.name]
+        const roomCapacity = room.energyCapacityAvailable
 
         if(!room.memory.overLordData!['Core']){
             roleCore.init(room)
@@ -64,22 +66,22 @@ const roleCore: OverLord = {
         const upgraderAmount = creepFinder('Upgrader', roleCore.name)
 
         if (supplierAmount.length < minerAmount.length){
-            spawnCreep([MOVE, MOVE, MOVE, MOVE, CARRY, CARRY, CARRY, CARRY], `KIPS${Game.time}`, 
+            spawnCreep(getBody('Supplier', roomCapacity), `KIPS${Game.time}`, 
                 {role: 'Supplier', overLord: roleCore.name, workRoom: room, homeRoom: room.name, tasks: [], target: '', colony: room.memory.name}, room)
         }
 
         else if (MiningSite.isOpenSource(room)){
-            spawnCreep([WORK, WORK, WORK, WORK, WORK, MOVE], `KIPSM${Game.time}`, 
+            spawnCreep(getBody('Miner', roomCapacity), `KIPSM${Game.time}`, 
                 {role: 'Miner', overLord: roleCore.name, workRoom: room, homeRoom: room.name, tasks: [], target: '', colony: room.memory.name}, room)
         }
 
         else if (upgraderAmount.length < overLordData['Upgrader'].targetAmount){
-            spawnCreep([MOVE, MOVE, CARRY, CARRY, WORK, WORK, WORK, MOVE], `KIPU${Game.time}`, 
+            spawnCreep(getBody('Upgrader', roomCapacity), `KIPU${Game.time}`, 
                 {role: 'Upgrader', overLord: roleCore.name, workRoom: room, homeRoom: room.name, tasks: [], target: '', colony: room.memory.name}, room)
         }
 
         else if (workerAmount.length < overLordData['Worker'].targetAmount){
-            spawnCreep([MOVE, MOVE, CARRY, CARRY, WORK, WORK, WORK, MOVE], `KIPW${Game.time}`, 
+            spawnCreep(getBody('Worker', roomCapacity), `KIPW${Game.time}`, 
                 {role: 'Worker', overLord: roleCore.name, workRoom: room, homeRoom: room.name, tasks: [], target: '', colony: room.memory.name}, room)
         }
 

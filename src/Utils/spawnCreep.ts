@@ -4,6 +4,8 @@ export function spawnCreep(body:  BodyPartConstant[], name: string, creepMem: Cr
     for (let spawn of spawns){
         if (spawn.spawnCreep(body, name, {memory: creepMem}) === 0){
             spawn.spawnCreep(body, name, {memory: creepMem})
+
+            console.log(spawn.spawnCreep(body, name, {memory: creepMem}))
             break
         }
     }

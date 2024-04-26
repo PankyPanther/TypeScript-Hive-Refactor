@@ -29,7 +29,6 @@ export function DirectiveMain(room: Room): void {
     }
 
     
-    if (room.find(FIND_HOSTILE_CREEPS || FIND_HOSTILE_POWER_CREEPS).length){
-        runTowers(room)
-    }
+    runTowers(room)
+    
 }
