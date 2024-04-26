@@ -25,7 +25,7 @@ const roleCore: OverLord = {
                 targetAmount: 5
             },
             'Upgrader': {
-                targetAmount: 10
+                targetAmount: 6
             }
         }
     },
@@ -65,7 +65,7 @@ const roleCore: OverLord = {
         const workerAmount = creepFinder('Worker', roleCore.name)
         const upgraderAmount = creepFinder('Upgrader', roleCore.name)
 
-        if (supplierAmount.length < minerAmount.length){
+        if (supplierAmount.length < minerAmount.length + 1){
             spawnCreep(getBody('Supplier', roomCapacity), `KIPS${Game.time}`, 
                 {role: 'Supplier', overLord: roleCore.name, workRoom: room, homeRoom: room.name, tasks: [], target: '', colony: room.memory.name}, room)
         }

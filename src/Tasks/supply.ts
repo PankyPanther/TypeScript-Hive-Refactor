@@ -9,6 +9,7 @@ export const supply: Task = {
         let TPOS = Game.getObjectById<Structure>(target) as StructureSpawn | StructureExtension
 
         if (TPOS){
+            console.log(TPOS.pos)
             if (creep.transfer(TPOS, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE){
                 creep.moveTo(TPOS)
             }
@@ -36,7 +37,15 @@ export const supply: Task = {
         });
 
         if (extensions.length){
-            return extensions[0].id
+            for (let extension of extensions){
+                for (let creepName in Game.creeps){
+                    let creep = Game.creeps[creepName]
+
+                    if (creep.memory.target !== extension.id){
+                        return extension.id
+                    }
+                }
+            }
         }
 
         let spawn = room.find(FIND_MY_SPAWNS)[0];

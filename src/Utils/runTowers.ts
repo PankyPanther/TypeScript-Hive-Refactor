@@ -11,9 +11,11 @@ export function runTowers(room: Room): void{
                     return struct.hits < struct.hitsMax && (struct.structureType == STRUCTURE_CONTAINER || struct.structureType == STRUCTURE_ROAD) 
                 })
                 .sort((a, b) => (a.hits / a.hitsMax) - (b.hits / b.hitsMax))
-                
 
-            tower.repair(structure[0])
+
+            if (tower.store[RESOURCE_ENERGY] > tower.store.getCapacity(RESOURCE_ENERGY) * 0.25){
+                tower.repair(structure[0])
+            }
         }
     }
 }

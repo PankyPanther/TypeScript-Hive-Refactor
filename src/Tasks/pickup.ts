@@ -25,6 +25,9 @@ export const pickup: Task = {
             if (fetchedTarget){
                 creep.memory.target = fetchedTarget
             }
+            if (room.find(FIND_STRUCTURES).filter((struct)=> struct.structureType === STRUCTURE_CONTAINER).length && !fetchedTarget){
+                creep.memory.tasks.shift()
+            }
         }
     }, 
     getTarget: function(room){
