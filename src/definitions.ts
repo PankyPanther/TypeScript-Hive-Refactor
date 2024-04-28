@@ -37,7 +37,7 @@ export interface OverLord {
 
 export interface Task {
     run(room: Room, target: string, creep: Creep): void
-    getTarget?(room: Room): string | undefined
+    getTarget?(room: Room, creep?: Creep): string | undefined
     name: string
 }
 
@@ -73,17 +73,7 @@ export interface MiningSite {
 export const WhiteList: string[] = ["BobGuo"];
 
 
-declare global {
-    interface RoomMemory {
-        roomPlan?: number[]
-        currentRCL: number
-        role: string
-        lastEntered: number
-        OverLord?: [string]
-        overLordData?: {[overLordName: string]: overLordCreepJob}
-        miningSites?: MiningSites
-    }
-}
+
 
 
 

@@ -1,9 +1,8 @@
-export function roomEconomyScorer(room: Room) {
+export function roomEconomyScorer(room: Room): number {
     let colonyEnergy: number = 0
 
     if (room.memory.role !== 'Colony'){
         console.log('Room Provided is not a colony')
-        return
     }
 
     for (let creepName in Memory.creeps){
@@ -20,4 +19,6 @@ export function roomEconomyScorer(room: Room) {
     }
 
     console.log(colonyEnergy)
+
+    return colonyEnergy
 }

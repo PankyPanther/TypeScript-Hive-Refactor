@@ -10,8 +10,6 @@ import MiningSite from "Hive Clusters/MiningSite";
 import supply from "Tasks/supply";
 import build from "Tasks/build";
 import repair from "Tasks/repair";
-import { pick } from "lodash";
-import transfer from "Tasks/transfer";
 import withdraw from "Tasks/withdraw";
 import { getBody } from "Utils/getBody";
 
@@ -25,7 +23,7 @@ const roleCore: OverLord = {
                 targetAmount: 5
             },
             'Upgrader': {
-                targetAmount: 6
+                targetAmount: 5
             }
         }
     },
@@ -34,7 +32,7 @@ const roleCore: OverLord = {
         const overLordData = room.memory.overLordData![roleCore.name]
         const roomCapacity = room.energyCapacityAvailable
 
-        if(!room.memory.overLordData!['Core']){
+        if(!room.memory.overLordData![roleCore.name]){
             roleCore.init(room)
         }
 
@@ -64,6 +62,11 @@ const roleCore: OverLord = {
         const supplierAmount = creepFinder('Supplier', roleCore.name)
         const workerAmount = creepFinder('Worker', roleCore.name)
         const upgraderAmount = creepFinder('Upgrader', roleCore.name)
+
+
+        console.log('Suppliers: ', supplierAmount)
+        console.log('Workers: ', workerAmount)
+
 
         if (supplierAmount.length < minerAmount.length + 1){
             spawnCreep(getBody('Supplier', roomCapacity), `KIPS${Game.time}`, 

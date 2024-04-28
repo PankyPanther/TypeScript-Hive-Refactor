@@ -2,6 +2,7 @@ import { RoomRole } from "definitions"
 
 import roleColony from "./roleColony"
 import roleRemote from "./roleRemote"
+import roleExplored from "./roleExplored"
 
 interface RoleLookup {
     [roleName: string]: RoomRole 
@@ -10,11 +11,13 @@ interface RoleLookup {
 const ROLES: RoleLookup = {
     'Remote': roleRemote,
     'Colony': roleColony,
+    'explored': roleExplored
 }
 
 export function getRole(room: Room) {
     const roleName = room.memory.role
     if (!ROLES[roleName]) {
+        console.log(roleName)
         throw new Error(`There is no role defined for room: ${room}`)
     }
 

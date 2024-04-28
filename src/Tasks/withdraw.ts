@@ -19,7 +19,7 @@ export const withdraw: Task = {
             return
         }
 
-        if (!creep.memory.target || TPOS === null || TPOS.store.getFreeCapacity(RESOURCE_ENERGY)! === 0){
+        if (!creep.memory.target || TPOS === null || TPOS.store[RESOURCE_ENERGY] === 0){
             let fetchedTarget = this.getTarget!(room)
             if (fetchedTarget){
                 creep.memory.target = fetchedTarget

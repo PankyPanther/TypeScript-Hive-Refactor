@@ -1,3 +1,6 @@
+import { roomEconomyScorer } from "Logistics/roomEconomyScore";
+import roleColinazation from "Overlords/Colonization/roleColinazation";
+import roleCore from "Overlords/Core/roleCore";
 import roleBootSrap from "Overlords/Situational/roleBootStrap";
 import { getRoomPlan } from "RoomPlanner/getRoomPlan";
 import { placeConstructionSites } from "RoomPlanner/STRCUTURE_PLANNER/placeConstructionSites";
@@ -26,6 +29,14 @@ export function DirectiveMain(room: Room): void {
     if (room.controller?.level != room.memory.currentRCL){
         placeConstructionSites(room, room.controller!.level, getRoomPlan(room))
         room.memory.currentRCL++
+    }
+
+
+    if (Game.time % 20 === 0){
+        if (!room.memory.overLordData![roleColinazation.name]){
+            roleColinazation.init(room)
+            room.memory.OverLord?.push(roleColinazation.name)
+        }
     }
 
     

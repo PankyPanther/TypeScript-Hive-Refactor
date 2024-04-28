@@ -2,6 +2,7 @@ import { OverLord } from "definitions"
 
 import roleBootSrap from "./Situational/roleBootStrap"
 import roleCore from "./Core/roleCore"
+import roleColinazation from "./Colonization/roleColinazation"
 
 
 
@@ -13,7 +14,8 @@ interface OverLordLookUp {
 
 const OVERLORDS: OverLordLookUp = {
     'BootStrap': roleBootSrap,
-    'Core': roleCore
+    'Core': roleCore,
+    'Colinazation': roleColinazation
 }
 
 export function getOverLords(room: Room) {

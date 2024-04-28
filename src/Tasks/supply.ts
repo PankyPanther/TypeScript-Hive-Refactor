@@ -1,4 +1,5 @@
 import { Task } from "definitions";
+import { create } from "lodash";
 
 
 export const supply: Task = {
@@ -9,7 +10,6 @@ export const supply: Task = {
         let TPOS = Game.getObjectById<Structure>(target) as StructureSpawn | StructureExtension
 
         if (TPOS){
-            console.log(TPOS.pos)
             if (creep.transfer(TPOS, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE){
                 creep.moveTo(TPOS)
             }
@@ -24,28 +24,20 @@ export const supply: Task = {
         }
 
         if (!creep.memory.target || TPOS === null || TPOS.store.getFreeCapacity(RESOURCE_ENERGY)! === 0){
-            let fetchedTarget = this.getTarget!(room)
+            let fetchedTarget = this.getTarget!(room, creep)
             if (fetchedTarget){
                 creep.memory.target = fetchedTarget
             }
         }
     }, 
 
-    getTarget: function(room){
+    getTarget: function(room, creep){
         let extensions = room.find(FIND_STRUCTURES).filter((extension) => {
             return (extension.structureType === STRUCTURE_EXTENSION) && extension.store.getFreeCapacity(RESOURCE_ENERGY) > 0
         });
 
         if (extensions.length){
-            for (let extension of extensions){
-                for (let creepName in Game.creeps){
-                    let creep = Game.creeps[creepName]
-
-                    if (creep.memory.target !== extension.id){
-                        return extension.id
-                    }
-                }
-            }
+            return creep!.pos.findClosestByRange(extensions)!.id
         }
 
         let spawn = room.find(FIND_MY_SPAWNS)[0];

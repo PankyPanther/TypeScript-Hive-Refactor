@@ -12,6 +12,7 @@ import repair from "Tasks/repair"
 import signController from "Tasks/sgnCtrllor"
 import withdraw from "Tasks/withdraw"
 import transfer from "Tasks/transfer"
+import goToRoom from "Tasks/goToRoom"
 
 const TLookup: TaskLookup = {
     'harvest': harvest,
@@ -24,7 +25,8 @@ const TLookup: TaskLookup = {
     'repair': repair,
     'signController': signController,
     'withdraw': withdraw,
-    'transfer': transfer
+    'transfer': transfer,
+    'goToRoom': goToRoom
 }
 
 export function runOverLordCreeps(creepJob: string, overLord: string, defaultTasks: string[], room: Room): void {
