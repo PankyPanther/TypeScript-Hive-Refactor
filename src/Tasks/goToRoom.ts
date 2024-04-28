@@ -1,6 +1,7 @@
 import { Task } from "definitions";
 
-import { findRoomsWithinRadius } from "Overlords/Colonization/findAdjacentRooms";
+import { findRoomsWithinRadius } from "Overlords/Colonization/roomScouting";
+import { findRoomToScout } from "Overlords/Colonization/roomScouting";
 
 interface goToRoom extends Task {
     getScoutRoom(room: Room, creep: Creep): string
@@ -10,20 +11,17 @@ interface goToRoom extends Task {
 export const goToRoom: goToRoom = {
     name: 'goToRoom',
     run: function(room, target, creep) { 
-        if (target){
-            if (!creep.room || creep.fatigue > 0 ){
-                return
-            }
-            if (creep.room.name === target){
-                return
-            }
 
-            let dest = new RoomPosition(25, 25, target)
-            creep.moveTo(dest)
+        if (target) {
+            const exit = creep.room.findExitTo(target) as ExitConstant
+            if (exit) {
+                const path = creep.pos.findClosestByPath(exit);
+                if (path) {
+                    creep.moveTo(path);
+                } 
+            } 
+        } 
 
-        }
-
-        console.log(creep.room.name,creep.memory.target)
         if (creep.room.name === creep.memory.target){
             creep.memory.tasks.shift()
             creep.memory.target = ''
@@ -44,7 +42,7 @@ export const goToRoom: goToRoom = {
         return ''
     },
     getScoutRoom: function(room, creep){
-        return findRoomsWithinRadius(creep.memory.homeRoom, 2)[3] 
+        return findRoomToScout(findRoomsWithinRadius(room.name, 1))
     }
 };
 

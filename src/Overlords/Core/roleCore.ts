@@ -64,8 +64,8 @@ const roleCore: OverLord = {
         const upgraderAmount = creepFinder('Upgrader', roleCore.name)
 
 
-        console.log('Suppliers: ', supplierAmount)
-        console.log('Workers: ', workerAmount)
+        // console.log('Suppliers: ', supplierAmount)
+        // console.log('Workers: ', workerAmount)
 
 
         if (supplierAmount.length < minerAmount.length + 1){

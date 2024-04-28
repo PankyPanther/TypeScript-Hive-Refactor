@@ -10,6 +10,8 @@ declare global {
         OverLord?: [string]
         overLordData?: {[overLordName: string]: overLordCreepJob}
         miningSites?: MiningSites
+        status?: string
+        sourceCount?: number
     }
 }
 

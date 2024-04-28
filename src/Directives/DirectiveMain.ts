@@ -20,6 +20,13 @@ export function DirectiveMain(room: Room): void {
             console.log('Removing ADDING CORE: ', room.name)
             room.memory.OverLord!.push(roleBootSrap.name)
         }
+    } else {
+        if (Game.time % 20 === 0 && roomEconomyScorer(room) < 15){
+            if (!room.memory.overLordData![roleColinazation.name]){
+                roleColinazation.init(room)
+                room.memory.OverLord?.push(roleColinazation.name)
+            }
+        }
     }
 
     if (Game.time % 1000 == 0){
@@ -29,14 +36,6 @@ export function DirectiveMain(room: Room): void {
     if (room.controller?.level != room.memory.currentRCL){
         placeConstructionSites(room, room.controller!.level, getRoomPlan(room))
         room.memory.currentRCL++
-    }
-
-
-    if (Game.time % 20 === 0){
-        if (!room.memory.overLordData![roleColinazation.name]){
-            roleColinazation.init(room)
-            room.memory.OverLord?.push(roleColinazation.name)
-        }
     }
 
     

@@ -4,7 +4,7 @@ import { deleteCreepMemory } from "Utils/deleteCreepMem";
 
 
 export function loop(): void {
-  console.log('Game Time: ', Game.time)
+  // console.log('Game Time: ', Game.time)
 
   for (const creepName in Memory.creeps) {
     if(!Game.creeps[creepName]) {

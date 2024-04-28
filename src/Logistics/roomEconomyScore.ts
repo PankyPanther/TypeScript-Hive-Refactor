@@ -18,7 +18,7 @@ export function roomEconomyScorer(room: Room): number {
         }
     }
 
-    console.log(colonyEnergy)
+    // console.log(colonyEnergy)
 
     return colonyEnergy
 }
