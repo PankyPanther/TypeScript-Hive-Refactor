@@ -1,5 +1,6 @@
 import { roomEconomyScorer } from "Logistics/roomEconomyScore";
 import roleColinazation from "Overlords/Colonization/roleColinazation";
+import { createRemoteRoom } from "Overlords/Colonization/selectingRemote";
 import roleCore from "Overlords/Core/roleCore";
 import roleBootSrap from "Overlords/Situational/roleBootStrap";
 import { getRoomPlan } from "RoomPlanner/getRoomPlan";
@@ -26,6 +27,8 @@ export function DirectiveMain(room: Room): void {
                 roleColinazation.init(room)
                 room.memory.OverLord?.push(roleColinazation.name)
             }
+
+            // createRemoteRoom(room)
         }
     }
 

@@ -12,6 +12,7 @@ declare global {
         miningSites?: MiningSites
         status?: string
         sourceCount?: number
+        parentRoom?: string
     }
 }
 

@@ -5,3 +5,14 @@ export function chooseRemote(inputRoom: string): string | null{
     console.log('Chosen remote: ', room)
     return room
 }
+
+export function createRemoteRoom(room: Room){
+    let remoteRoomName = chooseRemote(room.name)
+
+    if (remoteRoomName){
+        let RemoteRoom = Memory.rooms[remoteRoomName]
+
+        RemoteRoom.role = 'Remote'
+        RemoteRoom.parentRoom = room.name
+    }
+}

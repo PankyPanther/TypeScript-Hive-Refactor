@@ -66,7 +66,7 @@ export function findClosestRoomByPath(currentRoomName: string, roomsToCheck: str
         let path = PathFinder.search(startPos, endPos);
 
         // Check if this path is shorter than the previous shortest path
-        if (path && path.path.length < shortestPathLength && targetRoom.sourceCount! > 0) {
+        if (path && path.path.length < shortestPathLength && targetRoom.sourceCount! > 0 && !targetRoom.status && targetRoom.role === 'explored') {
             shortestPathLength = path.path.length;
             closestRoom = roomName;
         }
