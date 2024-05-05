@@ -17,6 +17,7 @@ import build from "Tasks/build";
 import harvestBoot from "./BootStrap/bootstrapHarvest";
 import MiningSite from "Hive Clusters/MiningSite";
 import roleCore from "Overlords/Core/roleCore";
+import { bootStrapWorker } from "./BootStrap/bootStrapWorker";
 
 const roleBootSrap: OverLord = {
     init: function(room) {
@@ -61,7 +62,7 @@ const roleBootSrap: OverLord = {
             return struct.structureType === STRUCTURE_EXTENSION
         })
 
-        if (extensions.length < 5 || room.find(FIND_MY_CREEPS).length < 3) {
+        if (extensions.length < 5 || room.find(FIND_MY_CREEPS).length < 3 || room.controller?.level === 1) {
             if (minerAmount.length < overLordData['Miner'].targetAmount){
                 console.log('miner')
                 spawnCreep([MOVE, CARRY, WORK, WORK], `KIPM${Game.time}`, 
@@ -106,7 +107,7 @@ const roleBootSrap: OverLord = {
         }
 
         if(workerAmount){
-            bootStrapFiller(room, workerAmount, WorkerTasks)
+            bootStrapWorker(room, workerAmount, WorkerTasks)
         }
 
         if(upgraderAmount){
