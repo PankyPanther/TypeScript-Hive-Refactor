@@ -18,6 +18,7 @@ export const goToRoom: goToRoom = {
                 const path = creep.pos.findClosestByPath(exit);
                 if (path) {
                     creep.moveTo(path);
+                    console.log(creep.moveTo(path))
                 } 
             } 
         } 

@@ -71,11 +71,14 @@ const roleCore: OverLord = {
         if (supplierAmount.length < minerAmount.length + 1){
             spawnCreep(getBody('Supplier', roomCapacity), `KIPS${Game.time}`, 
                 {role: 'Supplier', overLord: roleCore.name, workRoom: room, homeRoom: room.name, tasks: [], target: '', colony: room.memory.name}, room)
+            console.log(getBody('Supplier', roomCapacity))
+            console.log('supplier', roomCapacity)
         }
 
         else if (MiningSite.isOpenSource(room)){
             spawnCreep(getBody('Miner', roomCapacity), `KIPSM${Game.time}`, 
                 {role: 'Miner', overLord: roleCore.name, workRoom: room, homeRoom: room.name, tasks: [], target: '', colony: room.memory.name}, room)
+            console.log('Miner')
         }
 
         else if (upgraderAmount.length < overLordData['Upgrader'].targetAmount){

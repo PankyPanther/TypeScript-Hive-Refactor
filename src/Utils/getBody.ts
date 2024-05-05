@@ -50,6 +50,7 @@ export function getBody(creepRole: string, roomEnergyCapacity: number): BodyPart
         return bodyLookup[creepRole][800]
     }
     else if (roomEnergyCapacity >= 550 ){
+        console.log(bodyLookup[creepRole][550])
         return bodyLookup[creepRole][550]
     }
 

@@ -26,9 +26,11 @@ const MiningSite: HiveClusters = {
 
     isOpenSource: function(room){
         for (let flag of room.find(FIND_FLAGS)){
-            let flagCreepName = room.memory.miningSites![flag.name].creepName
-            if (!flagCreepName){
-                return true
+            if (room.memory.miningSites){
+                let flagCreepName = room.memory.miningSites![flag.name].creepName
+                if (!flagCreepName){
+                    return true
+                }
             }
         }
         return false
