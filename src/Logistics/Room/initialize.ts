@@ -24,11 +24,11 @@ export function initialize(room: Room): void {
     } else {
         room.memory.role = 'explored'
     }
-    
-    if (room.find(FIND_SOURCES).length){
-        room.memory.miningSites = MiningSite.init(room)!
-    }
 
+    if (!Game.flags[room.name]){
+        room.createFlag(25, 25, room.name)
+    }
+    
     room.memory.lastEntered = Game.time
     room.memory.currentRCL = 1
 }

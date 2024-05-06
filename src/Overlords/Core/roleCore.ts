@@ -9,9 +9,9 @@ import upgrade from "Tasks/upgrade";
 import MiningSite from "Hive Clusters/MiningSite";
 import supply from "Tasks/supply";
 import build from "Tasks/build";
-import repair from "Tasks/repair";
 import withdraw from "Tasks/withdraw";
 import { getBody } from "Utils/getBody";
+import repair from "Tasks/repair";
 
 const roleCore: OverLord = {
     init: function(room) {
@@ -23,7 +23,7 @@ const roleCore: OverLord = {
                 targetAmount: 5
             },
             'Upgrader': {
-                targetAmount: 5
+                targetAmount: 13
             }
         }
     },
@@ -106,7 +106,15 @@ const roleCore: OverLord = {
                 overLordData['Worker'].targetAmount = 5
 
             } else {
-                WorkerTasks.push(repair.name)
+                let repairs = room.find(FIND_STRUCTURES).filter((struct) => {
+                    return struct.hits < struct.hitsMax
+                })
+
+                if (repairs.length){
+                    WorkerTasks.push(repair.name)
+                } else {
+                    WorkerTasks.push(upgrade.name)
+                } 
                 overLordData['Worker'].targetAmount = 2
             }
 

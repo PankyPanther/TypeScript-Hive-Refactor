@@ -6,6 +6,7 @@ import { spawnCreep } from "Utils/spawnCreep";
 import { getBody } from "Utils/getBody";
 import harvest from "Tasks/harvest";
 import goToRoom from "Tasks/goToRoom";
+import scout from "Tasks/scout";
 
 
 const roleColinazation: OverLord = {
@@ -31,13 +32,13 @@ const roleColinazation: OverLord = {
             roleColinazation.init(room)
         }
 
-        const ScoutTasks = [goToRoom.name]
+        const ScoutTasks = [scout.name]
         const scoutAmount = creepFinder('Scouts', roleColinazation.name)
 
 
 
         if (scoutAmount.length < overLordData['Scouts'].targetAmount){
-            spawnCreep([MOVE, MOVE, MOVE, MOVE, MOVE], `KIPSss${Game.time}`, 
+            spawnCreep([MOVE], `KIPSss${Game.time}`, 
                 {role: 'Scouts', overLord: roleColinazation.name, workRoom: room, homeRoom: room.name, tasks: [], target: '', colony: room.memory.name}, room)
         }
 

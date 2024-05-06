@@ -9,11 +9,14 @@ export function roomEconomyScorer(room: Room): number {
         let creep = Game.creeps[creepName]
         if (creep.memory.colony === room.memory.name){
             let creepWorkParts = creep.getActiveBodyparts(WORK)
+            let creepMoveParts = creep.getActiveBodyparts(MOVE)
             if (creep.memory.role === 'Miner'){
                 colonyEnergy += creepWorkParts
             }
             else {
-                colonyEnergy -= (creepWorkParts)
+                if (creep.memory.role != 'Supplier'){
+                    colonyEnergy -= creepWorkParts - (creepMoveParts / 2)
+                }
             }
         }
     }

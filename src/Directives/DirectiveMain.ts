@@ -42,4 +42,5 @@ export function DirectiveMain(room: Room): void {
     
     runTowers(room)
     
+    // console.log(roomEconomyScorer(room))
 }

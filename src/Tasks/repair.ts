@@ -23,7 +23,7 @@ export const repair: Task = {
         }
 
         if (!creep.memory.target || TPOS === null || TPOS.hits === TPOS.hitsMax){
-            let fetchedTarget = this.getTarget!(room)
+            let fetchedTarget = this.getTarget!(room, creep)
             if (fetchedTarget){
                 creep.memory.target = fetchedTarget
             }
@@ -31,7 +31,7 @@ export const repair: Task = {
 
     }, 
 
-    getTarget: function(room){
+    getTarget: function(room, creep){
         let structure = room.find(FIND_STRUCTURES)
             .filter((struct) => {
                 return struct.hits < struct.hitsMax && (struct.structureType == STRUCTURE_CONTAINER || struct.structureType == STRUCTURE_ROAD) 
@@ -41,6 +41,8 @@ export const repair: Task = {
         if (structure.length){
             return structure[0].id
         }
+
+        creep!.memory.tasks! = []
         return ''
     }
 };
