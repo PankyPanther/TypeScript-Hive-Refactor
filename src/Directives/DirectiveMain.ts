@@ -7,7 +7,7 @@ import { runTowers } from "Utils/runTowers";
 
 export function DirectiveMain(room: Room): void {
 
-    if (room.find(FIND_MY_CREEPS).length < 3){
+    if (room.find(FIND_MY_CREEPS).length < 5){
         let isOverlordCore = room.memory.OverLord!.find((data) => {
             if (data === roleBootSrap.name){
                 return data

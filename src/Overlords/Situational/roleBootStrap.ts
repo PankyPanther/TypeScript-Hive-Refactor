@@ -26,10 +26,10 @@ const roleBootSrap: OverLord = {
         room.memory.overLordData = {
             'BootStrap': {
                 'Miner': {
-                    targetAmount: 2
+                    targetAmount: 3
                 },
                 'Filler': {
-                    targetAmount: 1
+                    targetAmount: 2
                 },
                 'Upgrader': {
                     targetAmount: 2
@@ -47,6 +47,10 @@ const roleBootSrap: OverLord = {
             roleBootSrap.init(room)
         }
 
+        if (!room.memory.miningSites){
+            MiningSite.init(room)
+        }
+
         const MinerTasks = [harvestBoot.name]
         const FillerTasks = [pickup.name, supply.name]
         const UpgraderTasks = [pickup.name, upgrade.name]
@@ -62,7 +66,7 @@ const roleBootSrap: OverLord = {
             return struct.structureType === STRUCTURE_EXTENSION
         })
 
-        if (extensions.length < 5 || room.find(FIND_MY_CREEPS).length < 3 || room.controller?.level === 1) {
+        if (extensions.length < 5 || room.find(FIND_MY_CREEPS).length < 5 || room.controller?.level === 1) {
             if (minerAmount.length < overLordData['Miner'].targetAmount){
                 console.log('miner')
                 spawnCreep([MOVE, CARRY, WORK, WORK], `KIPM${Game.time}`, 

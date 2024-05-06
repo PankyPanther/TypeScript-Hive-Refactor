@@ -1,3 +1,4 @@
+import MiningSite from "Hive Clusters/MiningSite";
 import roleBootSrap from "Overlords/Situational/roleBootStrap";
 import { getRoomPlan } from "RoomPlanner/getRoomPlan";
 import { placeConstructionSites } from "RoomPlanner/STRCUTURE_PLANNER/placeConstructionSites";
@@ -18,9 +19,14 @@ export function initialize(room: Room): void {
         getRoomPlan(room)
         room.memory.role = 'Colony'
         room.memory.name = 'Colony-' + Game.time
+        room.memory.miningSites = MiningSite.init(room)!
 
     } else {
         room.memory.role = 'explored'
+    }
+    
+    if (room.find(FIND_SOURCES).length){
+        room.memory.miningSites = MiningSite.init(room)!
     }
 
     room.memory.lastEntered = Game.time
