@@ -1,4 +1,5 @@
-import { Task } from "definitions";
+import { controllerSign, Task } from "definitions";
+import signController from "./sgnCtrllor";
 
 
 export const scout: Task = {
@@ -15,6 +16,9 @@ export const scout: Task = {
                 validExits.push(roomName);
               }
             }
+            
+
+
             if (validExits.length > 0) {
               var randomExit =
                 validExits[Math.floor(Math.random() * validExits.length)];
@@ -25,6 +29,12 @@ export const scout: Task = {
             // If the creep is in transit to its target room
             creep.moveTo(new RoomPosition(25, 25, creep.memory.target));
           }
+      
+        if (creep.room.controller){
+          if (creep.room.controller.sign?.text != controllerSign){
+            creep.memory.tasks.unshift(signController.name)
+          } 
+        }
     }
 };
 

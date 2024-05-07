@@ -20,7 +20,7 @@ declare global {
     interface CreepMemory {
         role: string
         overLord: string
-        workRoom: Room
+        workRoom: string | undefined
         homeRoom: string
         colony: string
         tasks: string[]
@@ -70,7 +70,8 @@ export interface MiningSites {
 }
 
 export interface MiningSite {
-    creepName: string;
+    hualerCreep: string;
+    minerCreep: string;
 }
 
 export const WhiteList: string[] = ["BobGuo"];

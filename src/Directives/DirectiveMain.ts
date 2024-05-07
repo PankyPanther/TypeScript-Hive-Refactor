@@ -20,13 +20,11 @@ export function DirectiveMain(room: Room): void {
             room.memory.OverLord!.push(roleBootSrap.name)
         }
     } else {
-        if (Game.time % 20 === 0 && roomEconomyScorer(room) < 15 && room.controller!.level > 1){
+        if (Game.time % 20 === 1 && room.controller!.level > 1){
             if (!room.memory.overLordData![roleColinazation.name]){
                 roleColinazation.init(room)
                 room.memory.OverLord?.unshift(roleColinazation.name)
             }
-
-            // createRemoteRoom(room)
         }
     }
 

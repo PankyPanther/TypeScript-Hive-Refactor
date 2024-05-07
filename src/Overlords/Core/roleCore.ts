@@ -31,7 +31,7 @@ const roleCore: OverLord = {
     run: function(room) {
         const overLordData = room.memory.overLordData![roleCore.name]
         const roomCapacity = room.energyCapacityAvailable
-
+        
         if(!room.memory.overLordData![roleCore.name]){
             roleCore.init(room)
         }
@@ -70,22 +70,22 @@ const roleCore: OverLord = {
 
         if (supplierAmount.length < minerAmount.length + 1){
             spawnCreep(getBody('Supplier', roomCapacity), `KIPS${Game.time}`, 
-                {role: 'Supplier', overLord: roleCore.name, workRoom: room, homeRoom: room.name, tasks: [], target: '', colony: room.memory.name}, room)
+                {role: 'Supplier', overLord: roleCore.name, workRoom: room.name, homeRoom: room.name, tasks: [], target: '', colony: room.memory.name}, room)
         }
 
         else if (MiningSite.isOpenSource(room)){
             spawnCreep(getBody('Miner', roomCapacity), `KIPSM${Game.time}`, 
-                {role: 'Miner', overLord: roleCore.name, workRoom: room, homeRoom: room.name, tasks: [], target: '', colony: room.memory.name}, room)
+                {role: 'Miner', overLord: roleCore.name, workRoom: room.name, homeRoom: room.name, tasks: [], target: '', colony: room.memory.name}, room)
         }
 
         else if (upgraderAmount.length < overLordData['Upgrader'].targetAmount){
             spawnCreep(getBody('Upgrader', roomCapacity), `KIPU${Game.time}`, 
-                {role: 'Upgrader', overLord: roleCore.name, workRoom: room, homeRoom: room.name, tasks: [], target: '', colony: room.memory.name}, room)
+                {role: 'Upgrader', overLord: roleCore.name, workRoom: room.name, homeRoom: room.name, tasks: [], target: '', colony: room.memory.name}, room)
         }
 
         else if (workerAmount.length < overLordData['Worker'].targetAmount){
             spawnCreep(getBody('Worker', roomCapacity), `KIPW${Game.time}`, 
-                {role: 'Worker', overLord: roleCore.name, workRoom: room, homeRoom: room.name, tasks: [], target: '', colony: room.memory.name}, room)
+                {role: 'Worker', overLord: roleCore.name, workRoom: room.name, homeRoom: room.name, tasks: [], target: '', colony: room.memory.name}, room)
         }
 
 

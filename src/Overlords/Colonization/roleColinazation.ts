@@ -32,14 +32,14 @@ const roleColinazation: OverLord = {
             roleColinazation.init(room)
         }
 
-        const ScoutTasks = [scout.name]
+        const ScoutTasks = [goToRoom.name]
         const scoutAmount = creepFinder('Scouts', roleColinazation.name)
 
 
 
         if (scoutAmount.length < overLordData['Scouts'].targetAmount){
             spawnCreep([MOVE], `KIPSss${Game.time}`, 
-                {role: 'Scouts', overLord: roleColinazation.name, workRoom: room, homeRoom: room.name, tasks: [], target: '', colony: room.memory.name}, room)
+                {role: 'Scouts', overLord: roleColinazation.name, workRoom: '', homeRoom: room.name, tasks: [], target: '', colony: room.memory.name}, room)
         }
 
 

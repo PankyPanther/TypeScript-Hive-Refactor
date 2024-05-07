@@ -14,7 +14,8 @@ const MiningSite: HiveClusters = {
             for (const flag of flags) {
                 if (flag.name.split('-')[0] == 'MiningSite'){
                     let data: MiningSite = {
-                        creepName: ''
+                        minerCreep: '',
+                        hualerCreep: ''
                     };
                     miningSites[flag.name] = data;
                 }
@@ -27,9 +28,11 @@ const MiningSite: HiveClusters = {
     isOpenSource: function(room){
         for (let flag of room.find(FIND_FLAGS)){
             if (room.memory.miningSites){
-                let flagCreepName = room.memory.miningSites![flag.name].creepName
-                if (!flagCreepName){
-                    return true
+                if (flag.name.split('-')[0] === 'MiningSite'){
+                    let flagCreepName = room.memory.miningSites[flag.name].minerCreep
+                    if (!flagCreepName){
+                        return true
+                    }
                 }
             }
         }
@@ -38,7 +41,7 @@ const MiningSite: HiveClusters = {
 
     getOpenSource: function(room){
         for (let flag of room.find(FIND_FLAGS)){
-            let flagCreepName = room.memory.miningSites![flag.name].creepName
+            let flagCreepName = room.memory.miningSites![flag.name].minerCreep
             if (!flagCreepName){
                 return flag.name
             }

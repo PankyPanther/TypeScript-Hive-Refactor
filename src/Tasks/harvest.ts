@@ -13,7 +13,7 @@ export const harvest: Task = {
             if (fetchedTarget){
                 creep.memory.target = fetchedTarget
                 let flag = MiningSite.getOpenSource(room)
-                room.memory.miningSites![flag!].creepName = 'CREEP HERE STOP :('
+                room.memory.miningSites![flag!].minerCreep = 'CREEP HERE STOP :('
             }
         }
 

@@ -21,7 +21,6 @@ import { bootStrapWorker } from "./BootStrap/bootStrapWorker";
 
 const roleBootSrap: OverLord = {
     init: function(room) {
-        room.memory.OverLord = ['']
         room.memory.OverLord!.push('BootStrap')
         room.memory.overLordData = {
             'BootStrap': {
@@ -39,7 +38,6 @@ const roleBootSrap: OverLord = {
                 }
             }
         }
-        room.memory.OverLord.shift()
     },
     name: 'BootStrap',
     run: function(room) {
@@ -70,19 +68,19 @@ const roleBootSrap: OverLord = {
             if (minerAmount.length < overLordData['Miner'].targetAmount){
                 console.log('miner')
                 spawnCreep([MOVE, CARRY, WORK, WORK], `KIPM${Game.time}`, 
-                    {role: 'Miner', overLord: roleBootSrap.name, workRoom: room, homeRoom: room.name, tasks: [], target: '', colony: room.memory.name}, room)
+                    {role: 'Miner', overLord: roleBootSrap.name, workRoom: room.name, homeRoom: room.name, tasks: [], target: '', colony: room.memory.name}, room)
             }
             else if (fillerAmount.length < overLordData['Filler'].targetAmount){
                 spawnCreep([MOVE,MOVE,MOVE, CARRY, CARRY, CARRY], `KIPF${Game.time}`, 
-                    {role: 'Filler', overLord: roleBootSrap.name, workRoom: room, homeRoom: room.name, tasks: [], target: '', colony: room.memory.name}, room)
+                    {role: 'Filler', overLord: roleBootSrap.name, workRoom: room.name, homeRoom: room.name, tasks: [], target: '', colony: room.memory.name}, room)
             }
             else if (upgraderAmount.length < overLordData['Upgrader'].targetAmount){
                 spawnCreep([MOVE, CARRY, WORK, WORK], `KIPU${Game.time}`, 
-                    {role: 'Upgrader', overLord: roleBootSrap.name, workRoom: room, homeRoom: room.name, tasks: [], target: '', colony: room.memory.name}, room)
+                    {role: 'Upgrader', overLord: roleBootSrap.name, workRoom: room.name, homeRoom: room.name, tasks: [], target: '', colony: room.memory.name}, room)
             }
             else if (workerAmount.length < overLordData['Worker'].targetAmount){
                 spawnCreep([MOVE, CARRY, WORK, WORK], `KIPW${Game.time}`, 
-                    {role: 'Worker', overLord: roleBootSrap.name, workRoom: room, homeRoom: room.name, tasks: [], target: '', colony: room.memory.name}, room)
+                    {role: 'Worker', overLord: roleBootSrap.name, workRoom: room.name, homeRoom: room.name, tasks: [], target: '', colony: room.memory.name}, room)
             }
         } else { 
             let isOverlordCore = room.memory.OverLord!.find((data) => {

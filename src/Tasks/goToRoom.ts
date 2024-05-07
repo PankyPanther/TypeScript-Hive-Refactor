@@ -1,52 +1,32 @@
 import { Task } from "definitions";
 
-import { findRoomsWithinRadius } from "Overlords/Colonization/roomScouting";
-import { findRoomToScout } from "Overlords/Colonization/roomScouting";
-
-interface goToRoom extends Task {
-    getScoutRoom(room: Room, creep: Creep): string
-}
-
-
-export const goToRoom: goToRoom = {
+export const goToRoom: Task = {
     name: 'goToRoom',
     run: function(room, target, creep) { 
-
-        if (target) {
-            const exit = creep.room.findExitTo(target) as ExitConstant
-            if (exit) {
-                const path = creep.pos.findClosestByPath(exit);
-                if (path) {
-                    if (creep.moveTo(path) !== 0){
-                        creep.moveTo(new RoomPosition(25, 25, target))
-                    } else {
-                        creep.moveTo(path);
-                    }
-                } 
-            } 
+        creep.memory.workRoom = 'W23N21'
+        if (creep.memory.workRoom) {
+            let flag = Game.flags[creep.memory.workRoom]
+            console.log(flag)
+            creep.moveTo(flag)
         } 
 
-        if (creep.room.name === creep.memory.target){
+        if (creep.room.name === creep.memory.workRoom){
             creep.memory.tasks.shift()
             creep.memory.target = ''
             return
         }
 
         if (!creep.memory.target || target === null){
-            if (creep.memory.role === 'Scouts'){
-                let fetchedTarget = this.getScoutRoom!(room, creep)
-                if (fetchedTarget){
-                    creep.memory.target = fetchedTarget
-                }
+            let fetchedTarget = this.getTarget!(room)
+            if (fetchedTarget){
+                creep.memory.target = fetchedTarget
             }
+            
         }
     }, 
     getTarget: function(room){
 
         return ''
-    },
-    getScoutRoom: function(room, creep){
-        return findRoomToScout(findRoomsWithinRadius(room.name, 1))
     }
 };
 
