@@ -1,7 +1,6 @@
 import { HiveClusters } from "definitions";
 import { MiningSites } from "definitions";
 import { MiningSite } from "definitions";
-import { floor } from "lodash";
 
 const MiningSite: HiveClusters = {
     name: 'MiningSite',

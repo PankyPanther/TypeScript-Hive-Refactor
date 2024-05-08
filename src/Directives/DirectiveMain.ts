@@ -6,7 +6,6 @@ import { placeConstructionSites } from "RoomPlanner/STRCUTURE_PLANNER/placeConst
 import { runTowers } from "Utils/runTowers";
 
 export function DirectiveMain(room: Room): void {
-
     if (room.find(FIND_MY_CREEPS).length < 5){
         let isOverlordCore = room.memory.OverLord!.find((data) => {
             if (data === roleBootSrap.name){
@@ -21,10 +20,10 @@ export function DirectiveMain(room: Room): void {
         }
     } else {
         if (Game.time % 20 === 1 && room.controller!.level > 1){
-            if (!room.memory.overLordData![roleColinazation.name]){
-                roleColinazation.init(room)
-                room.memory.OverLord?.unshift(roleColinazation.name)
-            }
+            // if (!room.memory.overLordData![roleColinazation.name]){
+            //     roleColinazation.init(room)
+            //     room.memory.OverLord?.unshift(roleColinazation.name)
+            // }
         }
     }
 

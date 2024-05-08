@@ -21,6 +21,7 @@ import { bootStrapWorker } from "./BootStrap/bootStrapWorker";
 
 const roleBootSrap: OverLord = {
     init: function(room) {
+        room.memory.OverLord! = ['']
         room.memory.OverLord!.push('BootStrap')
         room.memory.overLordData = {
             'BootStrap': {
@@ -38,6 +39,7 @@ const roleBootSrap: OverLord = {
                 }
             }
         }
+        room.memory.OverLord!.shift()
     },
     name: 'BootStrap',
     run: function(room) {

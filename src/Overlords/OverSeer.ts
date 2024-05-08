@@ -30,6 +30,8 @@ export function getOverLords(room: Room) {
 export function runOverLords(room: Room) {
     const Overlords = getOverLords(room)
     for (let overLord of Overlords){
-        OVERLORDS[overLord].run(room)
+        if (overLord){
+            OVERLORDS[overLord].run(room)
+        }
     }
 }

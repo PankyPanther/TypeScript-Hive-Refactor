@@ -10,10 +10,8 @@ export function loop(): void {
     if(!Game.creeps[creepName]) {
       console.log(`Deleting memory for dead creep: ${creepName}`)
 
-
       deleteCreepMemory(Memory.creeps[creepName].target, Memory.creeps[creepName].workRoom)
 
-      
       delete Memory.creeps[creepName];
     }
   }

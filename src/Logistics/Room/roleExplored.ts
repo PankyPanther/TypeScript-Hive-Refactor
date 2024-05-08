@@ -13,6 +13,10 @@ const roleExplored: RoomRole = {
         if (hostile.length){
             room.memory.status = 'hostile'
         }
+
+        if (!room.memory.parentRoom){
+            room.memory.parentRoom = room.find(FIND_MY_CREEPS)[0].memory.homeRoom
+        }
         
     }
 };
