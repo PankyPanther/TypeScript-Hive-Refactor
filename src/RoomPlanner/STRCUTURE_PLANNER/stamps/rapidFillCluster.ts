@@ -19,8 +19,8 @@ function rapidFillCluster(roomPosition: RoomPosition, roomMatrix: CostMatrix){
     roomMatrix.set(roomPosition.x+1, roomPosition.y-1, embedRCLandStructure(3, 3))
   
     // radius 2
-    roomMatrix.set(roomPosition.x-2, roomPosition.y, embedRCLandStructure(5, 14))
-    roomMatrix.set(roomPosition.x+2, roomPosition.y, embedRCLandStructure(5, 14))
+    roomMatrix.set(roomPosition.x-2, roomPosition.y, embedRCLandStructure(4, 14))
+    roomMatrix.set(roomPosition.x+2, roomPosition.y, embedRCLandStructure(4, 14))
 
     roomMatrix.set(roomPosition.x, roomPosition.y-2, embedRCLandStructure(7, 1))
     roomMatrix.set(roomPosition.x, roomPosition.y+2, embedRCLandStructure(8, 1))

@@ -1,12 +1,24 @@
 import { controllerSign, Task } from "definitions";
 import signController from "./sgnCtrllor";
+import goToRoom from "./goToRoom";
 
 
 export const scout: Task = {
     name: 'scout',
     run: function(room, target, creep) { 
+        Memory.rooms[creep.room.name].lastEntered = Game.time
 
         if (!creep.memory.target || creep.room.name === creep.memory.target) {
+            for (let room in Memory.rooms){
+              if (Game.time - Memory.rooms[room].lastEntered > 10000){
+                creep.memory.workRoom = room
+                creep.memory.tasks.unshift(goToRoom.name)
+                console.log(room, Memory.rooms[room].lastEntered, Game.time)
+                return
+              }
+            }
+
+
             // If the creep doesn't have a target room or has reached its target room
             var exits = Object.entries(Game.map.describeExits(creep.room.name));
             var validExits = [];

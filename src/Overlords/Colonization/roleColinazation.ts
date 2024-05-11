@@ -32,7 +32,7 @@ const roleColinazation: OverLord = {
             roleColinazation.init(room)
         }
 
-        const ScoutTasks = [goToRoom.name]
+        const ScoutTasks = [scout.name]
         const scoutAmount = creepFinder('Scouts', roleColinazation.name)
 
 
@@ -46,7 +46,6 @@ const roleColinazation: OverLord = {
         if (scoutAmount){
             runOverLordCreeps('Scouts', roleColinazation.name, ScoutTasks, room)
         }
-
     }
 };
 

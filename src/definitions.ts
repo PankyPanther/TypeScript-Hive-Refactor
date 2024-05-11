@@ -1,3 +1,5 @@
+import { Tracing } from "trace_events"
+
 export const controllerSign = 'You are not safe from the trees'
 
 declare global {
@@ -74,9 +76,10 @@ export interface MiningSite {
     minerCreep: string;
 }
 
-export const WhiteList: string[] = ["BobGuo"];
-
-
+export interface Ally {
+    allies: string[]
+    isAlly: (allyName: string) => boolean;
+}
 
 
 

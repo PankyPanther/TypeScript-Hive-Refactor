@@ -12,6 +12,10 @@ const roleExplored: RoomRole = {
 
         if (hostile.length){
             room.memory.status = 'hostile'
+        } else {
+            if (room.memory.status){
+                delete room.memory.status
+            }
         }
 
         if (!room.memory.parentRoom){

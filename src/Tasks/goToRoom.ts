@@ -3,10 +3,8 @@ import { Task } from "definitions";
 export const goToRoom: Task = {
     name: 'goToRoom',
     run: function(room, target, creep) { 
-        creep.memory.workRoom = 'W23N21'
         if (creep.memory.workRoom) {
             let flag = Game.flags[creep.memory.workRoom]
-            console.log(flag)
             creep.moveTo(flag)
         } 
 

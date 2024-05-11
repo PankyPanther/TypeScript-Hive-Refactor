@@ -32,7 +32,7 @@ const roleBootSrap: OverLord = {
                     targetAmount: 2
                 },
                 'Upgrader': {
-                    targetAmount: 2
+                    targetAmount: 3
                 },
                 'Worker': {
                     targetAmount: 10

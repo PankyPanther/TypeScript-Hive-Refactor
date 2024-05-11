@@ -9,9 +9,9 @@ import upgrade from "Tasks/upgrade";
 import MiningSite from "Hive Clusters/MiningSite";
 import supply from "Tasks/supply";
 import build from "Tasks/build";
-import withdraw from "Tasks/withdraw";
 import { getBody } from "Utils/getBody";
 import repair from "Tasks/repair";
+import transfer from "Tasks/transfer";
 
 const roleCore: OverLord = {
     init: function(room) {
@@ -46,16 +46,14 @@ const roleCore: OverLord = {
         if (room.find(FIND_STRUCTURES).filter((struct) => struct.structureType === STRUCTURE_CONTAINER).length){
             if (room.find(FIND_DROPPED_RESOURCES).length){
                 SupplierTasks.push(pickup.name)
-            }else {
-                SupplierTasks.push(withdraw.name)
+            } else {
+                SupplierTasks.push(transfer.name)
             }
-            WorkerTasks.push(withdraw.name)
-            UpgraderTasks.push(withdraw.name)
-        } else {
-             SupplierTasks.push(pickup.name)
-             WorkerTasks.push(pickup.name)
-             UpgraderTasks.push(pickup.name)
-        }
+
+            WorkerTasks.push(transfer.name)
+            UpgraderTasks.push(transfer.name)
+        } 
+        
 
         const minerAmount = creepFinder('Miner', roleCore.name)
         const haulerAmount = creepFinder('Hauler', roleCore.name)

@@ -1,10 +1,6 @@
 import { RoomRole } from "definitions";
-
-import { getRoomPlan } from "RoomPlanner/getRoomPlan";
-import { visualizeSetup } from "RoomPlanner/visualizeSetup";
 import { runOverLords } from "Overlords/OverSeer";
 import { DirectiveMain } from "Directives/DirectiveMain";
-import { roomEconomyScorer } from "Logistics/roomEconomyScore";
 import { chooseRemote } from "Overlords/Colonization/selectingRemote";
 
 
@@ -12,8 +8,9 @@ const roleColony: RoomRole = {
     run: function(room) {
         // let CM = getRoomPlan(room)
         // visualizeSetup(CM, room.name)
-        roomEconomyScorer(room)
+        // roomEconomyScorer(room)
 
+        // chooseRemote(room.name)
         DirectiveMain(room)
         runOverLords(room)
     }
