@@ -1,29 +1,31 @@
-import { roomOBJData } from "definitions"
+import { roomOBJData, RoomRoles } from "definitions"
 
 export class RoomManager {
-    initRoom(room: Room){
+    initRoom(room: Room, role: RoomRoles){
         if (!Memory.rooms){
             Memory.rooms = {}
         }
 
         Memory.rooms[room.name] = {
+            role: role,
             Sources: [],
             Minerals: [],
-            Controller: []
+            Controller: [],
+            Spawns: []
         }
-        this.collectStaticRoomData(room)
-    }
-
-    collectStaticRoomData(room: Room){
+        
         const sources: Source[] = room.find(FIND_SOURCES)
         const minerals: Mineral[] = room.find(FIND_MINERALS)
+        const spawns: StructureSpawn[] = room.find(FIND_MY_SPAWNS)
 
         if (sources.length){
             for (let source of sources){
                 const sourceData: roomOBJData = {
                     Id: source.id,
-                    x: source.pos.x,
-                    y: source.pos.y,
+                    coord: {
+                        x: source.pos.x,
+                        y: source.pos.y
+                    },
                     roomName: source.room.name
                 }
                 room.memory.Sources.push(sourceData)
@@ -34,8 +36,10 @@ export class RoomManager {
             for (let mineral of minerals){
                 const mineralData: roomOBJData = {
                     Id: mineral.id,
-                    x: mineral.pos.x,
-                    y: mineral.pos.y,
+                    coord: {
+                        x: mineral.pos.x,
+                        y: mineral.pos.y
+                    },
                     roomName: mineral.room!.name
                 }
                 room.memory.Minerals.push(mineralData) 
@@ -45,11 +49,27 @@ export class RoomManager {
         if (room.controller){
             const controllerData: roomOBJData = {
                 Id: room.controller.id,
-                x: room.controller.pos.x,
-                y: room.controller.pos.y,
+                coord: {
+                    x: room.controller.pos.x,
+                    y: room.controller.pos.y
+                },
                 roomName: room.controller.room.name
             }
             room.memory.Controller.push(controllerData) 
+        }
+
+        if (spawns.length){
+            for (let spawn of spawns){
+                const spawnData: roomOBJData = {
+                    Id: spawn.id,
+                    coord: {
+                        x: spawn.pos.x,
+                        y: spawn.pos.y
+                    },
+                    roomName: spawn.room.name
+                }
+                room.memory.Spawns.push(spawnData) 
+            }
         }
     }
 }
