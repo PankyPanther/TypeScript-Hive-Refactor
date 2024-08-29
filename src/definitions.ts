@@ -4,6 +4,7 @@ import { TaskNames } from "Managers/TaskManager"
 declare global {
     interface RoomMemory {
         role: RoomRoles
+        taskList: taskListFormat[]
         Sources: roomOBJData[]
         Minerals: roomOBJData[] 
         Controller: roomOBJData[]
@@ -30,4 +31,13 @@ export interface roomOBJData {
     Id: string
     coord: Coord
     roomName: string
+}
+
+export interface interactableRoomOBJData extends roomOBJData {
+    openPositions: Coord[]
+}
+
+interface taskListFormat {
+    taskName: TaskNames
+    bodyTypeName: BodyTypeName
 }

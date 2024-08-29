@@ -1,11 +1,10 @@
-import { spawn } from "child_process";
-
-export type BodyTypeName = "Bootstrap"
+export type BodyTypeName = "BootstrapHarvester" | "BootStrapHauler"
 type BodyTypeLookup = {[bodyType in BodyTypeName]: BodyPartConstant[]}
 
 export class SpawningManager {
     private bodyTypeList: BodyTypeLookup = {
-        "Bootstrap": [WORK, WORK, MOVE, CARRY]
+        "BootstrapHarvester": [WORK, WORK, MOVE, CARRY],
+        "BootStrapHauler": [CARRY,CARRY,CARRY, MOVE, MOVE, MOVE]
     };
 
     private creepNames: string[] = [
